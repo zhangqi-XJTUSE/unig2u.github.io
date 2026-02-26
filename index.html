@@ -110,153 +110,248 @@
 	</section>
 
 
-	<div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: -65px;">
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Business_Economics_1.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Business</span><br>
-					<span class="subtitle">Economics</span>
-				</p>
-			</div>
+	<!-- Teaser carousel strip: 4×4 grid, each cell is an image carousel -->
+	<style>
+		.video-teaser-container {
+			position: relative;
+			width: 25%;
+			margin: 0;
+			overflow: hidden;
+			cursor: pointer;
+		}
+		.tc-slide {
+			position: absolute;
+			inset: 0;
+			opacity: 0;
+			transition: opacity 0.7s ease;
+		}
+		.tc-slide.active { opacity: 1; }
+		.video-teaser-container .tc-slide:first-child {
+			position: relative;
+			opacity: 1;
+		}
+		.tc-slide img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			background-color: #000;
+			filter: brightness(0.65);
+			display: block;
+		}
+		.video-teaser-container .tc-slide:first-child img {
+			display: block;
+		}
+		.tc-dots {
+			position: absolute;
+			bottom: 28px; left: 0; right: 0;
+			display: flex;
+			justify-content: center;
+			gap: 4px;
+			pointer-events: none;
+		}
+		.tc-dots span {
+			width: 5px; height: 5px;
+			border-radius: 50%;
+			background: rgba(255,255,255,0.4);
+			display: inline-block;
+			transition: background 0.3s;
+		}
+		.tc-dots span.active { background: #fff; }
+	</style>
+
+	<div style="display: flex; flex-wrap: wrap; margin-top: -65px;">
+
+		<!-- Row 1 -->
+		<!-- 1. Real-world Applications | VSP Collision -->
+		<div class="video-teaser-container" data-tc-labels="Real-world Applications|VSP Collision">
+			<div class="tc-slide active"><img src="./assets/carousel/rwa_vsp_collision/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/rwa_vsp_collision/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/rwa_vsp_collision/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/rwa_vsp_collision/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Real-world Applications</span><br><span class="subtitle">VSP Collision</span></p></div>
 		</div>
 
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Business_Finance_2.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Business</span><br>
-					<span class="subtitle">Finance</span>
-				</p>
-			</div>
+		<!-- 2. Real-world Applications | VSP Google Map -->
+		<div class="video-teaser-container" data-tc-labels="Real-world Applications|VSP Google Map">
+			<div class="tc-slide active"><img src="./assets/carousel/rwa_vsp_googlemap/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/rwa_vsp_googlemap/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/rwa_vsp_googlemap/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/rwa_vsp_googlemap/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Real-world Applications</span><br><span class="subtitle">VSP Google Map</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Business_Manage_3.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Business</span><br>
-					<span class="subtitle">Manage</span>
-				</p>
-			</div>
+
+		<!-- 3. Mathematical Reasoning | AuxSolidMath -->
+		<div class="video-teaser-container" data-tc-labels="Mathematical Reasoning|AuxSolidMath">
+			<div class="tc-slide active"><img src="./assets/carousel/math_auxsolid/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/math_auxsolid/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/math_auxsolid/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/math_auxsolid/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Mathematical Reasoning</span><br><span class="subtitle">AuxSolidMath</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Business_Economics_4.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Business</span><br>
-					<span class="subtitle">Economics</span>
-				</p>
-			</div>
+
+		<!-- 4. Mathematical Reasoning | Geometry3K -->
+		<div class="video-teaser-container" data-tc-labels="Mathematical Reasoning|Geometry3K">
+			<div class="tc-slide active"><img src="./assets/carousel/math_geometry3k/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/math_geometry3k/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/math_geometry3k/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/math_geometry3k/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Mathematical Reasoning</span><br><span class="subtitle">Geometry3K</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Engineering_Architecture_Engineering_5.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Engineering</span><br>
-					<span class="subtitle">Architecture</span>
-				</p>
-			</div>
+
+		<!-- Row 2 -->
+		<!-- 5. STEM | PhyX Mechanics -->
+		<div class="video-teaser-container" data-tc-labels="STEM|PhyX Mechanics">
+			<div class="tc-slide active"><img src="./assets/carousel/stem_mechanics/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/stem_mechanics/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/stem_mechanics/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/stem_mechanics/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">STEM</span><br><span class="subtitle">PhyX Mechanics</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Engineering_energy_6.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Engineering</span><br>
-					<span class="subtitle">Energy</span>
-				</p>
-			</div>
+
+		<!-- 6. STEM | PhyX Optics -->
+		<div class="video-teaser-container" data-tc-labels="STEM|PhyX Optics">
+			<div class="tc-slide active"><img src="./assets/carousel/stem_optics/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/stem_optics/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/stem_optics/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/stem_optics/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">STEM</span><br><span class="subtitle">PhyX Optics</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Engineering_electronics_8.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Engineering</span><br>
-					<span class="subtitle">Electronics</span>
-				</p>
-			</div>
+
+		<!-- 7. Puzzles & Games | UniMMMU Jigsaw -->
+		<div class="video-teaser-container" data-tc-labels="Puzzles and Games|UniMMMU Jigsaw">
+			<div class="tc-slide active"><img src="./assets/carousel/puzzle_jigsaw/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/puzzle_jigsaw/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/puzzle_jigsaw/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/puzzle_jigsaw/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Puzzles and Games</span><br><span class="subtitle">UniMMMU Jigsaw</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Engineering_Computer_Science_1.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Engineering</span><br>
-					<span class="subtitle">Computer Science</span>
-				</p>
-			</div>
+
+		<!-- 8. Puzzles & Games | UniMMMU Maze -->
+		<div class="video-teaser-container" data-tc-labels="Puzzles and Games|UniMMMU Maze">
+			<div class="tc-slide active"><img src="./assets/carousel/puzzle_maze/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/puzzle_maze/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/puzzle_maze/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/puzzle_maze/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Puzzles and Games</span><br><span class="subtitle">UniMMMU Maze</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Art_Arthistory_13.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Art</span><br>
-					<span class="subtitle">Art Theory</span>
-				</p>
-			</div>
+
+		<!-- Row 3 -->
+		<!-- 9. Chart & Table Reasoning | ChartQA (A) -->
+		<div class="video-teaser-container" data-tc-labels="Chart and Table Reasoning|ChartQA">
+			<div class="tc-slide active"><img src="./assets/carousel/chart_chartqa_a/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/chart_chartqa_a/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/chart_chartqa_a/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/chart_chartqa_a/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Chart &amp; Table Reasoning</span><br><span class="subtitle">ChartQA</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Art_Arttheory_14.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Art</span><br>
-					<span class="subtitle">Art Theory</span>
-				</p>
-			</div>
+
+		<!-- 10. Chart & Table Reasoning | ChartQA (B) -->
+		<div class="video-teaser-container" data-tc-labels="Chart and Table Reasoning|ChartQA">
+			<div class="tc-slide active"><img src="./assets/carousel/chart_chartqa_b/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/chart_chartqa_b/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/chart_chartqa_b/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/chart_chartqa_b/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Chart &amp; Table Reasoning</span><br><span class="subtitle">ChartQA</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Humanities_psychology_15.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Humanities</span><br>
-					<span class="subtitle">Psychology</span>
-				</p>
-			</div>
+
+		<!-- 11. Spatial Intelligence | MMSI MSR -->
+		<div class="video-teaser-container" data-tc-labels="Spatial Intelligence|MMSI MSR">
+			<div class="tc-slide active"><img src="./assets/carousel/spatial_msr/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/spatial_msr/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/spatial_msr/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/spatial_msr/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Spatial Intelligence</span><br><span class="subtitle">MMSI MSR</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Humainities_history_16.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Humanities</span><br>
-					<span class="subtitle">History</span>
-				</p>
-			</div>
+
+		<!-- 12. Spatial Intelligence | MMSI Motion Cam -->
+		<div class="video-teaser-container" data-tc-labels="Spatial Intelligence|MMSI Motion Cam">
+			<div class="tc-slide active"><img src="./assets/carousel/spatial_motion_cam/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/spatial_motion_cam/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/spatial_motion_cam/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/spatial_motion_cam/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Spatial Intelligence</span><br><span class="subtitle">MMSI Motion Cam</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Science_physics_11.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Science</span><br>
-					<span class="subtitle">Physics</span>
-				</p>
-			</div>
+
+		<!-- Row 4 -->
+		<!-- 13. Perception Reasoning | Illusion Icon -->
+		<div class="video-teaser-container" data-tc-labels="Perception Reasoning|Illusion Icon">
+			<div class="tc-slide active"><img src="./assets/carousel/perc_illusion_icon/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/perc_illusion_icon/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/perc_illusion_icon/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/perc_illusion_icon/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Perception Reasoning</span><br><span class="subtitle">Illusion Icon</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Science_Chemistry_10.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Science</span><br>
-					<span class="subtitle">Chemistry</span>
-				</p>
-			</div>
+
+		<!-- 14. Perception Reasoning | Illusion Logo -->
+		<div class="video-teaser-container" data-tc-labels="Perception Reasoning|Illusion Logo">
+			<div class="tc-slide active"><img src="./assets/carousel/perc_illusion_logo/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/perc_illusion_logo/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/perc_illusion_logo/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/perc_illusion_logo/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Perception Reasoning</span><br><span class="subtitle">Illusion Logo</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/test_Clinical_medicine_173.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Medicine</span><br>
-					<span class="subtitle">Clinical Medicine</span>
-				</p>
-			</div>
+
+		<!-- 15. Perception Reasoning | Visual Puzzles Algorithmic -->
+		<div class="video-teaser-container" data-tc-labels="Perception Reasoning|Visual Puzzles Algorithmic">
+			<div class="tc-slide active"><img src="./assets/carousel/perc_vp_algorithmic/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/perc_vp_algorithmic/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/perc_vp_algorithmic/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/perc_vp_algorithmic/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Perception Reasoning</span><br><span class="subtitle">Visual Puzzles Algorithmic</span></p></div>
 		</div>
-		<div class="video-teaser-container">
-			<video playsinline autoplay="autoplay" loop="loop" muted="muted" type="video/mp4" class="video-teaser" src="./assets/samples/Medicine_public_health_12.mp4"></video>
-			<div class="hover-overlay">
-				<p class="text-container">
-					<span class="title">Medicine</span><br>
-					<span class="subtitle">Public Health</span>
-				</p>
-			</div>
+
+		<!-- 16. Perception Reasoning | Visual Puzzles Spatial -->
+		<div class="video-teaser-container" data-tc-labels="Perception Reasoning|Visual Puzzles Spatial">
+			<div class="tc-slide active"><img src="./assets/carousel/perc_vp_spatial/0.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/perc_vp_spatial/1.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/perc_vp_spatial/2.png" alt=""></div>
+			<div class="tc-slide"><img src="./assets/carousel/perc_vp_spatial/3.png" alt=""></div>
+			<div class="tc-dots"><span class="active"></span><span></span><span></span><span></span></div>
+			<div class="hover-overlay"><p class="text-container"><span class="title">Perception Reasoning</span><br><span class="subtitle">Visual Puzzles Spatial</span></p></div>
 		</div>
+
 	</div>
+
+	<script>
+	(function() {
+		document.querySelectorAll('.video-teaser-container').forEach(function(tc) {
+			var slides = tc.querySelectorAll('.tc-slide');
+			var dots = tc.querySelectorAll('.tc-dots span');
+			var cur = 0;
+
+			function goTo(n) {
+				slides[cur].classList.remove('active');
+				dots[cur] && dots[cur].classList.remove('active');
+				cur = (n + slides.length) % slides.length;
+				slides[cur].classList.add('active');
+				dots[cur] && dots[cur].classList.add('active');
+			}
+
+			var timer = setInterval(function() { goTo(cur + 1); }, 5000);
+
+			tc.addEventListener('click', function() {
+				clearInterval(timer);
+				goTo(cur + 1);
+				timer = setInterval(function() { goTo(cur + 1); }, 5000);
+			});
+		});
+	})();
+	</script>
 
 	<section id="Abstract">
 		<hr class="mt-5">
