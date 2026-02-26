@@ -119,6 +119,8 @@
 			margin: 0;
 			overflow: hidden;
 			cursor: pointer;
+			box-sizing: border-box;
+			border: 1px solid #222;
 		}
 		.tc-slide {
 			position: absolute;
@@ -138,6 +140,11 @@
 			background-color: #000;
 			filter: brightness(0.65);
 			display: block;
+			transition: filter 0.3s ease, transform 0.3s ease;
+		}
+		.video-teaser-container:hover .tc-slide img {
+			filter: brightness(0.9);
+			transform: scale(1.03);
 		}
 		.video-teaser-container .tc-slide:first-child img {
 			display: block;
@@ -160,7 +167,9 @@
 		.tc-dots span.active { background: #fff; }
 	</style>
 
-	<div style="display: flex; flex-wrap: wrap; margin-top: -65px;">
+	<!-- hero → carousel gradient transition -->
+	<div style="height: 40px; background: linear-gradient(to bottom, #1a1a2e, #000); margin-top: -65px; position: relative; z-index: 1;"></div>
+	<div style="display: flex; flex-wrap: wrap; margin-top: 0; position: relative; z-index: 1;">
 
 		<!-- Row 1 -->
 		<!-- 1. Real-world Applications | VSP Collision -->
