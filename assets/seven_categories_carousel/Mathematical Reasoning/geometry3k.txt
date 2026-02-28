@@ -1,0 +1,12 @@
+Question 1: <image>Find tanB
+5
+
+编号: auxsolidmath1
+Question: As shown in the diagram, the base ABCD is a square with side length 2, and the semicircular surface APD is perpendicular to the base ABCD. Point P is a moving point on the arc AD. Find the cosine value of the dihedral angle P-BC-D when the volume of the tetrahedron P-BCD is maximized.
+Auxiliary Line Description: Take O as the midpoint of AD, and draw Ox parallel to AB. Take O as the origin, and let the lines along Ox, OD, and OP be the x-axis, y-axis, and z-axis, respectively, then establish the three-dimensional Cartesian coordinate system O-xyz.
+Answer: 2√5/5
+
+编号: auxsolidmath2
+Question: As shown in the diagram, in the cube ABCD – A₁B₁C₁D₁, point P is a moving point on segment AB₁ (including endpoints), and point Q is the midpoint of segment AC. Let θ be the angle between PQ and plane ACD₁. Determine the minimum value of cosθ.
+Auxiliary Line Description: Take D as the origin, and let the lines along DA, DC, and DD₁ be the x-axis, y-axis, and z-axis, respectively, then establish the three-dimensional Cartesian coordinate system D-xyz.
+Answer: 1/3

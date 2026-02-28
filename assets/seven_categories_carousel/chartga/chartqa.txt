@@ -1,0 +1,11 @@
+Index: 1
+Question: What is the value of Czechia??
+Answer: 0.69
+
+Index: 2
+Question: When does the gap between Child before age 5 and neonatal become largest?
+Answer: 1990
+
+Index: 3
+Question: How much of the total investment received by Mexico was from the manufacturing industry as of September 2020?
+Answer: 40.13

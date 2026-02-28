@@ -1,0 +1,67 @@
+jigsaw
+
+You are a unified vision-language model. You will be given:
+(1) a 2×2 reference image with the bottom-right cell hidden, and
+(2) two candidate patch images ("Candidate 0" and "Candidate 1").
+
+Your job:
+- Mentally visualize placing each candidate into the bottom-right cell.
+- Compare which candidate yields the correct completion based on seam continuity, color/texture gradient, structural alignment, and global semantics.
+
+Output EXACTLY the following:
+
+1) Brief analysis comparing the two candidates
+
+2) One strict JSON object with your decision, wrapped as:
+<FINAL_ANSWER_JSON>
+{"choice": 0 or 1, "rationale": "≤30 words decisive cue"}
+</FINAL_ANSWER_JSON>
+
+Hard constraints:
+- Deterministic, single outcome. No hedging, no multiple possibilities.
+- Do not restate the task as the answer; reason from visual evidence.
+
+maze
+
+You are a precise maze solver.
+
+SEMANTICS
+- Black squares: walls (impassable)
+- White squares: path (walkable)
+- Blue dot: start (the agent)
+- Green rectangular frame: goal (reaching any white cell inside the green frame counts as success)
+- Legal moves: up, down, left, right only. One cell per step; no diagonals, no jumps; never cross walls.
+
+OUTPUT FORMAT
+1) Briefly describe your reasoning for the path.
+
+2) Output the final move list as a JSON array of lowercase strings, wrapped as:
+<ANSWER_JSON>["right","down","left"]</ANSWER_JSON>
+
+NO EXTRAS
+- No extra explanations beyond the brief reasoning and the JSON answer.
+
+
+sliding
+
+You are a precise sliding puzzle solver.
+
+TASK
+- You will be given an INITIAL state of a 3x3 sliding puzzle.
+- The goal is to find the sequence of moves to solve the puzzle.
+
+SEMANTICS
+- The puzzle is a 3x3 grid with 8 colored tiles and one empty space.
+- The RED square represents the EMPTY space.
+- A "move" consists of sliding an adjacent colored tile INTO the empty (red) space.
+- Moves are named by the direction the COLORED TILE moves. For example, if the blue tile is directly above the red space, moving the blue tile down into the red space's position is a "down" move.
+- Legal moves: up, down, left, right only. One tile per step.
+
+OUTPUT FORMAT
+1) Briefly describe your reasoning for the solution.
+
+2) Output the final move list as a JSON array of lowercase strings, wrapped as:
+<ANSWER_JSON>["down","right","up"]</ANSWER_JSON>
+
+NO EXTRAS
+- No extra explanations beyond the brief reasoning and the JSON answer.

@@ -1,0 +1,12 @@
+Question 1: A one-euro coin is dropped from the Leaning Tower of Pisa and falls freely from rest. What are its position after \( 3.0 \, \text{s} \)? Ignore air resistance.Please directly answer the question and provide the correct OPTION LETTER ONLY, e.g., A, B, C, D.
+OPTION: A: -35m B: -44m C: -65m D: -51m
+Answer: B
+
+Question 2: Your cousin Throckmorton skateboards from rest down a curved, frictionless ramp. If we treat Throcky and his skateboard as a particle, he moves through a quarter-circle as shown in figure. Throcky and his skateboard have a total mass of 25.0 kg. Find his speed at the bottom of the ramp.Please directly answer the question and provide the correct OPTION LETTER ONLY, e.g., A, B, C, D.
+OPTION: A: 5.42m/s B: 7.67m/s C: 4.98m/s D: 9.02m/s
+Answer: B
+
+Question 3: The light beam in figure strikes surface 2 at the critical angle. Determine the angle of incidence \( \theta_1 \).Please directly answer the question and provide the correct OPTION LETTER ONLY, e.g., A, B, C, D.
+OPTION: A: \( 17.5^{\circ} \) B: \( 19.3^{\circ} \) C: \( 27.5^{\circ} \) D: \( 42.3^{\circ} \)
+Answer: C
+

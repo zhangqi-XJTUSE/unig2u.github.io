@@ -1,0 +1,11 @@
+1.Question: How many different houses are captured in total in these two pictures?
+Options: A: 4, B: 2, C: 3, D: 5
+Answer: D
+
+2.Question: Which has a longer side perpendicular to the adjacent wall: the cabinet in Figure 1 or the table in Figure 2?
+Options: A: The table in Figure 2, B: The same length, C: The cabinet in Figure 1, D: Sometimes the cabinet in Figure 1, sometimes the table in Figure 2
+Answer: A
+
+3.Question: The images are taken continuously from a first-person perspective. In which direction is your viewpoint rotating?
+Options: A: Down, B: Left, C: Right, D: Up
+Answer: B

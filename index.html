@@ -16,32 +16,33 @@
 	<link href="./html_pages/resources/stylesheet.css" rel="stylesheet">
 	<script src="js/jquery-2.1.3.min.js"> </script>
 
-	<title>Video-MMMU</title>
+	<title>UniG2U</title>
 </head>
 
 	
 <body data-new-gr-c-s-check-loaded="14.1110.0" data-gr-ext-installed="">
 	<header>
 		<nav>
-			<a class="h5 pt-1" style="margin-left: 10px; color: #fff !important;" href="#Video-MMMU">Video-MMMU</a>
+			<a class="h5 pt-1" style="margin-left: 10px; color: #fff !important;" href="#Video-MMMU">UniG2U</a>
 		</nav>
 		<nav>
 			<a href="#Abstract">Abstract</a>
 			<a href="#Overview">Overview</a>
-			<a href="#Demo Video">Demo Video</a>
 			<a href="#Leaderboard">Leaderboard</a>
+			<a href="#Demo Video">Demo Video</a>
 			<a href="#Error Analysis">Case Study</a>
 
 			<!-- Dropdown Menu -->
 			<div class="dropdown">
-				<a href="#Examples">VideoMMMU Examples</a>
+				<a href="#Examples">UniG2U Examples</a>
 				<div class="dropdown-content">
-					<a href="#Art">Art</a>
-					<a href="#Business">Business</a>
-					<a href="#Humanities">Humanities</a>
-					<a href="#Science">Science</a>
-					<a href="#Medicine">Medicine</a>
-					<a href="#Engineering">Engineering</a>
+					<a href="#Art">Puzzles and Games</a>
+					<a href="#Business">Chartqa</a>
+					<a href="#Humanities">Mathematical Reasoning</a>
+					<a href="#Science">Perception Reasoning</a>
+					<a href="#Medicine">STEM</a>
+					<a href="#Engineering">Real-world App</a>
+					<a href="#AttributeMotion">Spatial Intelligence</a>
 				</div>
 			</div>
 		</nav>
@@ -363,313 +364,665 @@
 	</script>
 
 	<section id="Abstract">
-		<hr class="mt-5">
-		<div class="container" style="margin-top: 30px">
-			<h1 class="text-center">Abstract</h1>
-			<br>
-			<p class="description text-left">
-				Humans acquire knowledge through three cognitive stages: perceiving information, comprehending knowledge, and adapting knowledge to solve novel problems. Videos serve as an effective medium for this learning process, facilitating a progression through these cognitive stages. However, existing video benchmarks fail to systematically evaluate the <i>knowledge acquisition</i> capabilities in Large Multimodal Models (LMMs). To address this gap, we introduce <strong>Video-MMMU</strong>, a multi-modal, multi-disciplinary benchmark designed to assess LMMs' ability to acquire and utilize knowledge from videos. Video-MMMU features a curated collection of 300 expert-level videos and 900 human-annotated questions across six disciplines, evaluating <i>knowledge acquisition</i> through stage-aligned question-answer pairs: Perception, Comprehension, and Adaptation. A proposed knowledge gain metric, &Delta;<sub>knowledge</sub>, quantifies improvement in performance after watching the relevant video lectures. Evaluation of LMMs reveals a steep decline in performance as cognitive demands increase and highlights a significant gap between human and model knowledge acquisition, underscoring the need to enhance LMMs' capability to learn and adapt from videos. 
-			</p>
-			<br>
-			<div class="image-viewer" style="margin-top: 20px; text-align: center;">
-				<img src="./assets/figures/figure1_0316.png" alt="Example PDF as Image" style="width: 100%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-			</div>
-		</div>
-	</section>
-
-	<section id="Overview">
-		<hr class="mt-5">
-		<div class="container" style="margin-top: 30px">
-			<h1 class="text-center">Overview</h1>
-			<br>
-			<p class="description text-left">
-				We introduce <strong>Video-MMMU</strong>, a multi-modal and multi-disciplinary video benchmark that evaluates LMMs' knowledge acquisition capability from educational videos.
-			</p>
-			<p class="description text-left">
-				<strong>1) Video as a Knowledge Source:</strong><br>
-				Traditional VideoQA benchmarks focus primarily on evaluating how well models interpret visual content. Video-MMMU is the first to treat videos as a <strong>source of knowledge</strong>, assessing how effectively LMMs acquire knowledge from educational videos. Our dataset comprises 300 lecture-style, college-level videos spanning 30 subjects in 6 professional disciplines: Art, Business, Science, Medicine, Humanities, and Engineering.
-			</p>
-			<p class="description text-left">
-				<strong>2) Knowledge Acquisition-based Question Design:</strong><br>
-				Each video includes three question-answer pairs aligned with the three knowledge acquisition stages: Perception (identifying key information related to the knowledge), Comprehension (understanding the underlying concepts), and Adaptation (applying knowledge to new scenarios).
-			</p>
-			<p class="description text-left">
-				<strong>3) From Absolute Performance towards Learning Efficiency: Δ<sub>knowledge</sub></strong><br>
-				A key novelty of Video-MMMU is that it evaluates not only a model's final accuracy but also its <strong>delta accuracy</strong>—the improvement in performance after learning from a video. A model may initially fail to solve an MMMU-style exam question, but we give the model a video where a human learner could learn to solve the question by watching the video. Video-MMMU tests how well LMMs <strong>improve their performance</strong> after watching the videos. Video-MMMU introduces Δ<sub>knowledge</sub> to quantify the model's learning gain from the videos.  Δ<sub>knowledge</sub> is defined as the normalized performance gain on the Adaptation track questions:
-
-				<div style="text-align: center;">
-					Δ<sub>knowledge</sub> = (Acc<sub>after_video</sub> - Acc<sub>before_video</sub>) / (100% - Acc<sub>before_video</sub>) × 100%
-				</div>
-			</p>
-			<br>
-			<div class="image-viewer" style="margin-top: 20px; text-align: center;">
-				<img src="./assets/figures/figure_2.png" 
-					alt="Figure 2" 
-					style="width: 80%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-			</div>
-			<p class="description text-left">
-				<br>
-				<strong>Key Insights:</strong>
-			</p>
-			<div class="insights" style="margin-top: 10px;">
-				<ul style="line-height: 1.8;">
-					<li>
-						<strong>1) Progressive Performance Decline:</strong><br>
-						Model performance decreases as cognitive demands increase. While models perform relatively better on perception tasks, their accuracy drops notably on comprehension tasks and declines further on adaptation tasks.
-					</li>
-					<li style="margin-top: 15px;">
-						<strong>2) Knowledge Acquisition from Videos is Challenging:</strong><br>
-						The knowledge acquisition metric <i>&Delta;<sub>knowledge</sub></i> reveals a significant gap between human and model performance. While humans achieve substantial improvement (<i>&Delta;<sub>knowledge</sub></i> = 33.1%) after watching the videos, even the top-performing models show smaller knowledge gains (<i>GPT-4o</i>: <i>&Delta;<sub>knowledge</sub></i> = 15.6%, <i>Claude-3.5-Sonnet</i>: <i>&Delta;<sub>knowledge</sub></i> = 11.4%).
-					</li>
-				</ul>
-				<p style="margin-top: 15px;">
-					This limitation underscores a challenge in current LMMs. While humans naturally acquire knowledge through video-based learning, having developed this capability through classroom learning and educational experiences throughout life, LMMs struggle to effectively learn from videos. These findings emphasize the need for further research to enhance how LMMs acquire and utilize video-based information, bringing them closer to human-level learning processes.
-				</p>
-			</div>
-			
-		
-	</section>
-	
-	<section id="Leaderboard">
-		<hr class="mt-5">
-		<div class="container text-center" style="margin-top: 30px">
-			<h1>Video-MMMU Leaderboard</h1>
-    <p class="description">We evaluate various open-source and proprietary LMMs. The table below provides a detailed comparison. To submit your model results, please send an email to videommmu2025@gmail.com.</p>
-
-    <div class="legend">
-        <div class="legend-item">
-            <div class="legend-color human"></div>
-            <span>Human Expert</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color opensource"></div>
-            <span>Open-Source</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color proprietary"></div>
-            <span>Proprietary</span>
+    <hr class="mt-5">
+    <div class="container" style="margin-top: 30px">
+        <h1 class="text-center">Abstract</h1>
+        <br>
+        <p class="description text-left">
+            Unified multimodal models have recently demonstrated strong generative capabilities, yet whether and when generation improves understanding remains unclear. We introduce <strong>UniG2U-Bench</strong>, a comprehensive benchmark for studying generation-to-understanding (G2U) across seven reasoning regimes that require varying degrees of implicit or explicit visual transformation.
+            Extensive experiments on over 30 models reveal that generation does not yield universal gains: on most tasks, unified models underperform their corresponding base VLMs, and explicit generation-before-answering inference typically degrades performance relative to Direct inference. However, structured improvements consistently emerge in spatial and illusion-sensitive subtasks, where transformation-aware representations are beneficial. Moreover, G2U gain patterns are not random: tasks with similar reasoning structures and models sharing the same architecture or (more strongly) the same base model exhibit correlated behaviors, suggesting that generation–understanding coupling induces class-consistent inductive biases rather than isolated empirical fluctuations.
+        </p>
+        <br>
+        <div class="image-viewer" style="margin-top: 20px; text-align: center;">
+            <img src="./overview_img/abstract.png" alt="Example PDF as Image" style="width: 100%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
         </div>
     </div>
+</section>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Model</th>
-                <th>Overall | ∆<sub>knowledge</sub></th>
-                <th>Perception</th>
-                <th>Comprehension</th>
-                <th>Adaptation</th>
-            </tr>
-        </thead>
-        <tbody>
-<!-- 			<tr class="human-row">
-        	<td>Human<br>Average Undergraduate</td>
-                <td>74.44 | <span style="color:#4CAF50">+33.1</span></td>
-                <td>84.33</td>
-                <td>78.67</td>
-                <td>60.33</td>
-            </tr> -->
-			<!-- <tr class="proprietary-row">
-				<td><a href="https://openai.com/index/introducing-gpt-5/" target="_blank">GPT-5-thinking</a></td>
-                <td>84.6</td>
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-            </tr>
-			<tr class="proprietary-row">
-				<td><a href="https://deepmind.google/models/gemini/pro/" target="_blank">Gemini-2.5-Pro</a></td>
-                <td>83.6</td>
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-            </tr>
-			<tr class="proprietary-row">
-				<td><a href="https://openai.com/index/introducing-o3-and-o4-mini/" target="_blank">OpenAI O3</a></td>
-                <td>83.3</td>
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-            </tr> -->
-			<tr class="opensource-row">
-			    <td><a href="https://huggingface.co/Kwai-Keye/Keye-VL-1_5-8B" target="_blank">Keye-VL-1.5-8B</a></td>
-			    <td>66.00 | <span style="color:#4CAF50">+0.0</span></td>
-			    <td>77.67</td>
-			    <td>68.67</td>
-			    <td>51.67</td>
-			</tr>
-            <tr class="proprietary-row">
-				<td><a href="https://www.anthropic.com/news/claude-3-5-sonnet" target="_blank">Claude-3.5-Sonnet</a></td>
-                <td>65.78 | <span style="color:#4CAF50">+11.4</span></td>
-                <td>72.00</td>
-                <td>69.67</td>
-                <td>55.67</td>
-            </tr>
-			<tr class="opensource-row">
-                <td><a href="https://huggingface.co/moonshotai/Kimi-VL-A3B-Thinking-2506" target="_blank">Kimi-VL-A3B-Thinking-2506</a></td>
-                <td>65.22 | <span style="color:#4CAF50">+3.5</span></td>
-                <td>75.00</td>
-                <td>66.33</td>
-                <td>54.33</td>
-            </tr>
-            <tr class="proprietary-row">
-                <td><a href="https://openai.com/index/hello-gpt-4o/" target="_blank">GPT-4o</a></td>
-                <td>61.22 | <span style="color:#4CAF50">+15.6</span></td>
-                <td>66.00</td>
-                <td>62.00</td>
-                <td>55.67</td>
-            </tr>
-			<tr class="opensource-row">
-                <td><a href="https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct" target="_blank">Qwen-2.5-VL-72B</a></td>
-                <td>60.22 | <span style="color:#4CAF50">+9.7</span></td>
-                <td>69.33</td>
-                <td>61.00</td>
-                <td>50.33</td>
-            </tr>
-			<tr class="proprietary-row">
-			    <td><a href="https://www.bigmodel.cn/dev/api/normal-model/glm-4v" target="_blank">GLM-4V-PLUS-0111</a></td>
-			    <td>57.56 | <span style="color:#4CAF50">-1.7</span></td>
-			    <td>77.33</td>
-			    <td>53.33</td>
-			    <td>42.00</td>
-			</tr>
-            <tr class="proprietary-row">
-                <td><a href="https://deepmind.google/technologies/gemini/pro/" target="_blank">Gemini 1.5 Pro</a></td>
-                <td>53.89 | <span style="color:#4CAF50">+8.7</span></td>
-                <td>59.00</td>
-                <td>53.33</td>
-                <td>49.33</td>
-            </tr>
-			<tr class="opensource-row">
-			    <td><a href="https://arxiv.org/abs/2507.06485" target="_blank">Video-RTS</a></td>
-			    <td>52.70 | --</td>
-			    <td>--</td>
-			    <td>--</td>
-			    <td>--</td>
-			</tr>
-            <tr class="opensource-row">
-                <td><a href="https://rhymes.ai/blog-details/aria-first-open-multimodal-native-moe-model" target="_blank">Aria</a></td>
-                <td>50.78 | <span style="color:#4CAF50">+3.2</span></td>
-                <td>65.67</td>
-                <td>46.67</td>
-                <td>40.00</td>
-            </tr>
-            <tr class="proprietary-row">
-                <td><a href="https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf" target="_blank">Gemini 1.5 Flash</a></td>
-                <td>49.78 | <span style="color:#FF5252">-3.3</span></td>
-                <td>57.33</td>
-                <td>49.00</td>
-                <td>43.00</td>
-            </tr>
-            <tr class="opensource-row">
-                <td><a href="https://huggingface.co/lmms-lab/LLaVA-Video-72B-Qwen2" target="_blank">LLaVA-Video-72B</a></td>
-                <td>49.67 | <span style="color:#4CAF50">+7.1</span></td>
-                <td>59.67</td>
-                <td>46.00</td>
-                <td>43.33</td>
-            </tr>
-            <tr class="opensource-row">
-                <td><a href="https://huggingface.co/llava-hf/llava-onevision-qwen2-72b-ov-hf" target="_blank">LLaVA-OneVision-72B</a></td>
-                <td>48.33 | <span style="color:#4CAF50">+6.6</span></td>
-                <td>59.67</td>
-                <td>42.33</td>
-                <td>43.00</td>
-            </tr>
-			<tr class="opensource-row">
-                <td><a href="https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct" target="_blank">Qwen-2.5-VL-7B</a></td>
-                <td>47.44 | <span style="color:#4CAF50">+2.2</span></td>
-                <td>58.33</td>
-                <td>44.33</td>
-                <td>39.67</td>
-            </tr>
-			<tr class="opensource-row">
-                <td><a href="https://huggingface.co/DAMO-NLP-SG/VideoLLaMA3-7B" target="_blank">VideoLLaMA3-7B</a></td>
-                <td>47.00 | <span style="color:#FF5252">-0.5</span></td>
-                <td>60.33</td>
-                <td>46.00</td>
-                <td>34.67</td>
-            </tr>
-			<tr class="opensource-row">
-				<td><a href="https://huggingface.co/OpenGVLab/InternVideo2_5_Chat_8B" target="_blank">InternVideo2.5-Chat-8B</a></td>
-				<td>43.00 | <span style="color:#4CAF50">+3.0</span></td>
-				<td>54.67</td>
-				<td>41.67</td>
-				<td>32.67</td>
-			</tr>			
-			<tr class="opensource-row">
-                <td><a href="https://github.com/X-PLUG/mPLUG-Owl/tree/main/mPLUG-Owl3" target="_blank">mPLUG-Owl3-7B</a></td>
-                <td>42.00 | <span style="color:#4CAF50">+7.5</span></td>
-                <td>49.33</td>
-                <td>38.67</td>
-                <td>38.00</td>
-            </tr>
-            <tr class="opensource-row">
-                <td><a href="https://mammoth-vl.github.io/" target="_blank">MAmmoTH-VL-8B</a></td>
-                <td>41.78 | <span style="color:#4CAF50">+1.5</span></td>
-                <td>51.67</td>
-                <td>40.00</td>
-                <td>33.67</td>
-            </tr>
-			<tr class="opensource-row">
-				<td><a href="https://huggingface.co/OpenGVLab/VideoChat-Flash-Qwen2-7B_res448" target="_blank">VideoChat-Flash-7B@448</a></td>
-				<td>41.67 | <span style="color:#FF5252">-1.3</span></td>
-				<td>51.67</td>
-				<td>40.67</td>
-				<td>32.67</td>
-			</tr>			
-            <tr class="opensource-row">
-                <td><a href="https://huggingface.co/OpenGVLab/InternVL2-8B" target="_blank">InternVL2-8B</a></td>
-                <td>37.44 | <span style="color:#FF5252">-8.5</span></td>
-                <td>47.33</td>
-                <td>33.33</td>
-                <td>31.67</td>
-            </tr>
-            <tr class="opensource-row">
-                <td><a href="https://huggingface.co/lmms-lab/LLaVA-Video-7B-Qwen2" target="_blank">LLaVA-Video-7B</a></td>
-                <td>36.11 | <span style="color:#FF5252">-5.3</span></td>
-                <td>41.67</td>
-                <td>33.33</td>
-                <td>33.33</td>
-            </tr>
-            <tr class="opensource-row">
-                <td><a href="https://huggingface.co/Efficient-Large-Model/VILA1.5-40b" target="_blank">VILA1.5-40B</a></td>
-                <td>34.00 | <span style="color:#4CAF50">+9.4</span></td>
-                <td>38.67</td>
-                <td>30.67</td>
-                <td>32.67</td>
-            </tr>
-            <tr class="opensource-row">
-                <td><a href="https://huggingface.co/llava-hf/llava-onevision-qwen2-7b-ov-hf" target="_blank">LLaVA-OneVision-7B</a></td>
-                <td>33.89 | <span style="color:#FF5252">-5.6</span></td>
-                <td>40.00</td>
-                <td>31.00</td>
-                <td>30.67</td>
-            </tr>
-            <tr class="opensource-row">
-                <td><a href="https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/" target="_blank">Llama-3.2-11B</a></td>
-                <td>30.00 | <span style="color:#888">—</span></td>
-                <td>35.67</td>
-                <td>32.33</td>
-                <td>22.00</td>
-            </tr>
-            <tr class="opensource-row">
-                <td><a href="https://huggingface.co/lmms-lab/LongVA-7B" target="_blank">LongVA-7B</a></td>
-                <td>23.98 | <span style="color:#FF5252">-7.0</span></td>
-                <td>24.00</td>
-                <td>24.33</td>
-                <td>23.67</td>
-            </tr>
-            <tr class="opensource-row">
-                <td><a href="https://huggingface.co/Efficient-Large-Model/Llama-3-VILA1.5-8B-Fix" target="_blank">VILA1.5-8B</a></td>
-                <td>20.89 | <span style="color:#4CAF50">+5.9</span></td>
-                <td>20.33</td>
-                <td>17.33</td>
-                <td>25.00</td>
-            </tr>
-        </tbody>
-    </table>
 
-		</div>
-	</section>
+	<section id="Overview">
+    <hr class="mt-5">
+    <div class="container" style="margin-top: 30px">
+        <h1 class="text-center">Overview</h1>
+        <br>
+        <p class="description text-left">
+            We introduce <strong>UniG2U-Bench</strong>, a comprehensive benchmark designed to systematically study the Generation-to-Understanding (G2U) dynamic in multimodal unified models.
+        </p>
+
+        <p class="description text-left">
+            <strong>1) Isolating the G2U Dynamic:</strong><br>
+            While traditional benchmarks evaluate understanding or generation in isolation, UniG2U explicitly investigates <i>whether and when</i> generative capabilities benefit visual understanding. We benchmark over 30 unified models across 7 distinct reasoning regimes (e.g., Spatial Intelligence, Fine-grained Discrimination, Puzzles & Games) that require varying degrees of implicit or explicit visual transformation.
+        </p>
+
+        <p class="description text-left">
+            <strong>2) Direct vs. Stepwise Inference Protocols:</strong><br>
+            UniG2U evaluates models under two distinct paradigms: <i>Direct inference</i> (answering directly based on unified representations) and <i>Stepwise inference</i> (explicitly generating intermediate visual artifacts before answering). This decoupled design helps localize whether performance shifts stem from joint training objectives or the utility of intermediate visual reasoning.
+        </p>
+
+        <p class="description text-left">
+            <strong>3) Quantifying "Generation Helps Understanding": Δ<sub>G2U</sub></strong><br>
+            A key methodological contribution of UniG2U is isolating G2U gains by strictly comparing unified models against their foundational pure-understanding VLMs. To rigorously assess the impact of generation, we introduce Δ<sub>G2U</sub>, defined as the performance gap between a unified multimodal model (M<sub>UM</sub>) and its corresponding base model (M<sub>Base</sub>):
+
+            <div style="text-align: center; font-size: 1.1em; margin: 15px 0;">
+                Δ<sub>G2U</sub> = Perf(M<sub>UM</sub>) - Perf(M<sub>Base</sub>)
+            </div>
+        </p>
+        <br>
+
+        <!-- ==================== 三图轮播（原图轮播，无任何标签） ==================== -->
+        <div id="overviewCarousel" class="carousel slide mb-4" data-ride="carousel" data-interval="5000" style="max-width: 980px; margin: 0 auto;">
+            <ol class="carousel-indicators">
+                <li data-target="#overviewCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#overviewCarousel" data-slide-to="1"></li>
+                <li data-target="#overviewCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <!-- 图1 -->
+                <div class="carousel-item active">
+                    <img src="./overview_img/overview1.png" class="d-block w-100" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" alt="">
+                </div>
+                <!-- 图2 -->
+                <div class="carousel-item">
+                    <img src="./overview_img/overview2.png" class="d-block w-100" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" alt="">
+                </div>
+                <!-- 图3 -->
+                <div class="carousel-item">
+                    <img src="./overview_img/overview3.png" class="d-block w-100" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" alt="">
+                </div>
+            </div>
+            <!-- 左右控制箭头 -->
+            <a class="carousel-control-prev" href="#overviewCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#overviewCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <p class="description text-left">
+            <br>
+            <strong>Key Insights:</strong>
+        </p>
+
+        <div class="insights" style="margin-top: 10px;">
+            <ul style="line-height: 1.8;">
+                <li>
+                    <strong>1) No Universal Gains (The Interference Dilemma):</strong><br>
+                    Simply integrating generative capabilities does not yield universal improvements. On most standard tasks, unified models actually underperform their corresponding base VLMs due to inherent objective interference between generative and discriminative training.
+                </li>
+                <li style="margin-top: 15px;">
+                    <strong>2) Transformation-Aware Tasks Benefit (Structured Improvements):</strong><br>
+                    Despite overall drops, explicit generation yields consistent and distinct capability improvements on tasks that inherently require visual simulation or transformation, such as Spatial Intelligence and illusion-sensitive subtasks.
+                </li>
+                <li style="margin-top: 15px;">
+                    <strong>3) The Double-Edged Sword of Stepwise Reasoning:</strong><br>
+                    The explicit generation-before-answering (stepwise) paradigm typically degrades performance relative to direct inference if the generated intermediate artifacts lack high alignment fidelity, exposing the vulnerabilities of current step-wise visual reasoning.
+                </li>
+            </ul>
+            <p style="margin-top: 15px;">
+                These findings demystify the complex relationship between generation and understanding. They reveal that while generation-understanding coupling induces class-consistent inductive biases (rather than random fluctuations), current unified architectures still face critical trade-offs. The results emphasize the need for better architectural decoupling and higher intermediate visual alignment to truly achieve "Generation Helps Understanding."
+            </p>
+        </div>
+
+    </div>
+</section>
+
+    <script>
+    // 确保在文档加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+        // 如果你的项目使用的是 Bootstrap 4 (依赖 jQuery)
+        if (typeof $ !== 'undefined' && $.fn.carousel) {
+            $('#overviewCarousel').carousel({
+                interval: 2000, // 设置为 2000 毫秒（2秒）
+                pause: "hover"  // 鼠标悬停时暂停轮播（可选，提升体验）
+            });
+        }
+        // 如果你的项目使用的是 Bootstrap 5 (原生原生 JavaScript)
+        else if (typeof bootstrap !== 'undefined') {
+            var myCarousel = document.querySelector('#overviewCarousel');
+            var carousel = new bootstrap.Carousel(myCarousel, {
+                interval: 2000,
+                pause: 'hover'
+            });
+        }
+    });
+</script>
+
+
+	
+	<section id="Leaderboard">
+    <hr class="mt-5">
+    <div class="container text-center" style="margin-top: 30px">
+        <h1>UniG2U Leaderboard</h1>
+        <p class="description">Main results on UniG2U across categories. All values are reported as percentages (×100). Baseline models (marked with *) are highlighted with a light gray background. ∆ denotes the performance gap to the respective baseline. Bold: Within each block, the best score in each category is highlighted.</p>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #f5f5f5; border: 1px solid #ddd;"></div>
+                <span>Baseline Model</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #fff4e6; border: 1px solid #ddd;"></div>
+                <span>gpt4o</span>
+            </div>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; text-align: center;">
+            <thead>
+                <tr style="border-bottom: 2px solid #000;">
+                    <th style="text-align: left;">Model</th>
+                    <th>Real-world<br>Apps</th>
+                    <th>Math<br>Reasoning</th>
+                    <th>STEM</th>
+                    <th>Puzzles<br>& Games</th>
+                    <th>Chart</th>
+                    <th>Spatial<br>Intel.</th>
+                    <th>Perception<br>Reasoning</th>
+                    <th>Overall | ∆</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Block 1 -->
+                <tr style="background-color: #f5f5f5; color: #000; border-top: 2px solid #000;">
+                    <td style="text-align: left;">qwen2.5-vl-7b*</td>
+                    <td>40.25</td>
+                    <td><b>23.00</b></td>
+                    <td>34.00</td>
+                    <td>25.73</td>
+                    <td><b>86.00</b></td>
+                    <td>23.40</td>
+                    <td>39.42</td>
+                    <td><b>34.45</b> | <span style="color:#888;">+0.00</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">OmniGen2(direct)</td>
+                    <td><b>41.25</b></td>
+                    <td>14.00</td>
+                    <td>41.00</td>
+                    <td>20.91</td>
+                    <td>86.00</td>
+                    <td>23.80</td>
+                    <td>35.62</td>
+                    <td>31.99 | <span style="color:#FF5252">-2.46</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">OmniGen2(stepwise)</td>
+                    <td>41.25</td>
+                    <td>13.00</td>
+                    <td><b>41.50</b></td>
+                    <td>21.91</td>
+                    <td>79.00</td>
+                    <td><b>26.40</b></td>
+                    <td>34.52</td>
+                    <td>31.87 | <span style="color:#FF5252">-2.58</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">UniWorld-V1(stepwise)</td>
+                    <td>24.00</td>
+                    <td>19.00</td>
+                    <td>34.50</td>
+                    <td>24.72</td>
+                    <td>80.00</td>
+                    <td>24.80</td>
+                    <td>39.35</td>
+                    <td>32.96 | <span style="color:#FF5252">-1.49</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">OneCAT-3b(direct)</td>
+                    <td>39.50</td>
+                    <td>17.00</td>
+                    <td>32.00</td>
+                    <td>22.05</td>
+                    <td>76.68</td>
+                    <td>25.20</td>
+                    <td>34.55</td>
+                    <td>31.15 | <span style="color:#FF5252">-3.30</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">OneCAT-3b(stepwise)</td>
+                    <td>33.50</td>
+                    <td>8.50</td>
+                    <td>29.00</td>
+                    <td>20.69</td>
+                    <td>74.00</td>
+                    <td>23.80</td>
+                    <td>33.10</td>
+                    <td>28.80 | <span style="color:#FF5252">-5.65</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">JavisGPT(direct)</td>
+                    <td>32.00</td>
+                    <td>21.00</td>
+                    <td>26.50</td>
+                    <td>23.72</td>
+                    <td>78.60</td>
+                    <td>21.60</td>
+                    <td>35.52</td>
+                    <td>30.72 | <span style="color:#FF5252">-3.73</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">uni-video(stepwise)</td>
+                    <td>34.00</td>
+                    <td>21.50</td>
+                    <td>29.00</td>
+                    <td><b>29.33</b></td>
+                    <td>61.00</td>
+                    <td>20.00</td>
+                    <td><b>42.76</b></td>
+                    <td>34.25 | <span style="color:#FF5252">-0.20</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">UniPic2(stepwise)</td>
+                    <td>17.50</td>
+                    <td>17.00</td>
+                    <td>31.00</td>
+                    <td>23.95</td>
+                    <td>47.00</td>
+                    <td>24.60</td>
+                    <td>38.80</td>
+                    <td>30.65 | <span style="color:#FF5252">-3.80</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000; border-bottom: 1px solid #ccc;">
+                    <td style="text-align: left;">STAR-7B(stepwise)</td>
+                    <td>34.00</td>
+                    <td>14.50</td>
+                    <td>32.50</td>
+                    <td>23.56</td>
+                    <td>79.00</td>
+                    <td>25.20</td>
+                    <td>38.56</td>
+                    <td>32.68 | <span style="color:#FF5252">-1.77</span></td>
+                </tr>
+
+                <!-- Block 2 -->
+                <tr style="background-color: #f5f5f5; color: #000;">
+                    <td style="text-align: left;">Qwen2.5-VL-3B*</td>
+                    <td>41.00</td>
+                    <td>15.50</td>
+                    <td><b>40.50</b></td>
+                    <td>20.42</td>
+                    <td>87.00</td>
+                    <td><b>26.40</b></td>
+                    <td>35.55</td>
+                    <td><b>32.39</b> | <span style="color:#888;">+0.00</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">UAE(direct)</td>
+                    <td>36.75</td>
+                    <td>10.50</td>
+                    <td>30.50</td>
+                    <td>19.06</td>
+                    <td>85.00</td>
+                    <td>25.20</td>
+                    <td><b>36.37</b></td>
+                    <td>30.94 | <span style="color:#FF5252">-1.45</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">UAE(stepwise)</td>
+                    <td>23.00</td>
+                    <td>7.50</td>
+                    <td>32.50</td>
+                    <td>20.33</td>
+                    <td>71.00</td>
+                    <td>22.80</td>
+                    <td>34.68</td>
+                    <td>28.61 | <span style="color:#FF5252">-3.78</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">Ovis-U1(direct)</td>
+                    <td><b>45.50</b></td>
+                    <td><b>23.50</b></td>
+                    <td>30.50</td>
+                    <td><b>27.28</b></td>
+                    <td><b>90.00</b></td>
+                    <td>17.60</td>
+                    <td>34.92</td>
+                    <td>32.15 | <span style="color:#FF5252">-0.24</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000; border-bottom: 1px solid #ccc;">
+                    <td style="text-align: left;">Ovis-U1(stepwise)</td>
+                    <td>21.00</td>
+                    <td>16.50</td>
+                    <td>17.00</td>
+                    <td>18.00</td>
+                    <td>32.00</td>
+                    <td>20.40</td>
+                    <td>30.56</td>
+                    <td>24.19 | <span style="color:#FF5252">-8.20</span></td>
+                </tr>
+
+                <!-- Block 3 -->
+                <tr style="background-color: #f5f5f5; color: #000;">
+                    <td style="text-align: left;">yi-6B-vl*</td>
+                    <td>24.00</td>
+                    <td>0.00</td>
+                    <td>33.50</td>
+                    <td>13.22</td>
+                    <td>19.00</td>
+                    <td>22.60</td>
+                    <td>31.20</td>
+                    <td>23.73 | <span style="color:#888;">+0.00</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">mio(direct)</td>
+                    <td>18.00</td>
+                    <td>0.00</td>
+                    <td>31.00</td>
+                    <td>12.85</td>
+                    <td>15.00</td>
+                    <td><b>23.40</b></td>
+                    <td>25.49</td>
+                    <td>20.70 | <span style="color:#FF5252">-3.03</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000; border-bottom: 1px solid #ccc;">
+                    <td style="text-align: left;">mio(stepwise)</td>
+                    <td>15.00</td>
+                    <td>0.00</td>
+                    <td>28.00</td>
+                    <td>8.94</td>
+                    <td>13.00</td>
+                    <td>21.60</td>
+                    <td>24.94</td>
+                    <td>19.00 | <span style="color:#FF5252">-4.73</span></td>
+                </tr>
+
+                <!-- Block 4 -->
+                <tr style="background-color: #f5f5f5; color: #000;">
+                    <td style="text-align: left;">deepseek-v2*</td>
+                    <td>11.00</td>
+                    <td>4.50</td>
+                    <td>22.00</td>
+                    <td>18.02</td>
+                    <td><b>74.00</b></td>
+                    <td>17.40</td>
+                    <td>35.07</td>
+                    <td>25.86 | <span style="color:#888;">+0.00</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">Janus-Pro(direct)</td>
+                    <td><b>27.50</b></td>
+                    <td>7.50</td>
+                    <td>19.00</td>
+                    <td>22.49</td>
+                    <td>29.00</td>
+                    <td>24.20</td>
+                    <td>35.08</td>
+                    <td>27.39 | <span style="color:#4CAF50">+1.53</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000; border-bottom: 1px solid #ccc;">
+                    <td style="text-align: left;">AIA(direct)</td>
+                    <td>13.50</td>
+                    <td><b>8.50</b></td>
+                    <td><b>31.00</b></td>
+                    <td><b>23.95</b></td>
+                    <td>33.00</td>
+                    <td><b>26.60</b></td>
+                    <td><b>36.34</b></td>
+                    <td><b>28.65</b> | <span style="color:#4CAF50">+2.79</span></td>
+                </tr>
+
+                <!-- Block 5 -->
+                <tr style="background-color: #f5f5f5; color: #000;">
+                    <td style="text-align: left;">LLaDA-Instruct*</td>
+                    <td>27.25</td>
+                    <td>1.50</td>
+                    <td>21.00</td>
+                    <td><b>20.83</b></td>
+                    <td>9.00</td>
+                    <td>23.40</td>
+                    <td>13.78</td>
+                    <td>17.05 | <span style="color:#888;">+0.00</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000; border-bottom: 1px solid #ccc;">
+                    <td style="text-align: left;">MMaDA(direct)</td>
+                    <td><b>28.75</b></td>
+                    <td><b>5.00</b></td>
+                    <td><b>26.50</b></td>
+                    <td>16.01</td>
+                    <td><b>14.00</b></td>
+                    <td><b>25.00</b></td>
+                    <td><b>22.74</b></td>
+                    <td><b>21.09</b> | <span style="color:#4CAF50">+4.04</span></td>
+                </tr>
+
+                <!-- Block 6 -->
+                <tr style="background-color: #f5f5f5; color: #000;">
+                    <td style="text-align: left;">Janus-1.3B*</td>
+                    <td>13.50</td>
+                    <td><b>2.50</b></td>
+                    <td><b>29.00</b></td>
+                    <td><b>12.10</b></td>
+                    <td><b>50.00</b></td>
+                    <td>21.80</td>
+                    <td><b>23.52</b></td>
+                    <td><b>20.36</b> | <span style="color:#888;">+0.00</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000; border-bottom: 1px solid #ccc;">
+                    <td style="text-align: left;">FUDOK(direct)</td>
+                    <td><b>17.50</b></td>
+                    <td>1.00</td>
+                    <td>21.00</td>
+                    <td>9.31</td>
+                    <td>22.00</td>
+                    <td><b>29.00</b></td>
+                    <td>15.52</td>
+                    <td>16.40 | <span style="color:#FF5252">-3.96</span></td>
+                </tr>
+
+                <!-- Block 7 -->
+                <tr style="background-color: #f5f5f5; color: #000;">
+                    <td style="text-align: left;">Qwen3-VL-8B*</td>
+                    <td><b>40.00</b></td>
+                    <td><b>39.00</b></td>
+                    <td><b>37.00</b></td>
+                    <td><b>24.24</b></td>
+                    <td>89.00</td>
+                    <td><b>26.00</b></td>
+                    <td><b>43.66</b></td>
+                    <td><b>37.75</b> | <span style="color:#888;">+0.00</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000; border-bottom: 1px solid #ccc;">
+                    <td style="text-align: left;">MammothModa2(direct)</td>
+                    <td>33.50</td>
+                    <td>0.00</td>
+                    <td>36.50</td>
+                    <td>12.10</td>
+                    <td><b>91.00</b></td>
+                    <td>21.80</td>
+                    <td>39.11</td>
+                    <td>29.97 | <span style="color:#FF5252">-7.78</span></td>
+                </tr>
+
+                <!-- Block 8 -->
+                <tr style="background-color: #f5f5f5; color: #000;">
+                    <td style="text-align: left;">llava-hf*</td>
+                    <td><b>23.00</b></td>
+                    <td>0.00</td>
+                    <td><b>29.50</b></td>
+                    <td><b>18.96</b></td>
+                    <td>28.00</td>
+                    <td><b>24.60</b></td>
+                    <td><b>33.57</b></td>
+                    <td><b>26.06</b> | <span style="color:#888;">+0.00</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000; border-bottom: 1px solid #ccc;">
+                    <td style="text-align: left;">Emu3(direct)</td>
+                    <td>16.50</td>
+                    <td><b>1.00</b></td>
+                    <td>20.50</td>
+                    <td>13.37</td>
+                    <td><b>67.00</b></td>
+                    <td>23.20</td>
+                    <td>24.78</td>
+                    <td>21.46 | <span style="color:#FF5252">-4.60</span></td>
+                </tr>
+
+                <!-- Block 9 -->
+                <tr style="background-color: #f5f5f5; color: #000;">
+                    <td style="text-align: left;">llava-onevision*</td>
+                    <td><b>43.00</b></td>
+                    <td>10.50</td>
+                    <td><b>44.00</b></td>
+                    <td>24.48</td>
+                    <td>78.00</td>
+                    <td>25.40</td>
+                    <td>37.13</td>
+                    <td>33.35 | <span style="color:#888;">+0.00</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">X-Omni(direct)</td>
+                    <td>33.00</td>
+                    <td>9.50</td>
+                    <td>29.50</td>
+                    <td>26.24</td>
+                    <td>83.00</td>
+                    <td>27.00</td>
+                    <td>35.31</td>
+                    <td>31.63 | <span style="color:#FF5252">-1.72</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">bagel(direct)</td>
+                    <td>38.00</td>
+                    <td>29.00</td>
+                    <td>37.50</td>
+                    <td>23.77</td>
+                    <td><b>92.00</b></td>
+                    <td>28.40</td>
+                    <td><b>39.96</b></td>
+                    <td>35.84 | <span style="color:#4CAF50">+2.49</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">bagel(stepwise)</td>
+                    <td>32.75</td>
+                    <td><b>30.00</b></td>
+                    <td>40.50</td>
+                    <td><b>31.58</b></td>
+                    <td>91.00</td>
+                    <td><b>29.00</b></td>
+                    <td>37.29</td>
+                    <td><b>36.10</b> | <span style="color:#4CAF50">+2.75</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">TokenFlow-XL(direct)</td>
+                    <td>32.00</td>
+                    <td>21.00</td>
+                    <td>26.50</td>
+                    <td>23.72</td>
+                    <td>78.60</td>
+                    <td>21.60</td>
+                    <td>35.52</td>
+                    <td>30.72 | <span style="color:#FF5252">-2.63</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">show-o2(direct)</td>
+                    <td>35.50</td>
+                    <td>11.00</td>
+                    <td>40.00</td>
+                    <td>26.01</td>
+                    <td>45.00</td>
+                    <td>25.80</td>
+                    <td>36.50</td>
+                    <td>31.59 | <span style="color:#FF5252">-1.76</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">show-o2(stepwise)</td>
+                    <td>33.00</td>
+                    <td>9.00</td>
+                    <td>40.00</td>
+                    <td>26.39</td>
+                    <td>35.00</td>
+                    <td>20.40</td>
+                    <td>28.11</td>
+                    <td>26.59 | <span style="color:#FF5252">-6.76</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">ILLUME+(direct)</td>
+                    <td>24.50</td>
+                    <td>7.50</td>
+                    <td>35.00</td>
+                    <td>21.06</td>
+                    <td>80.00</td>
+                    <td>23.20</td>
+                    <td>35.08</td>
+                    <td>29.54 | <span style="color:#FF5252">-3.81</span></td>
+                </tr>
+                <tr style="background-color: #fff; color: #000; border-bottom: 2px solid #000;">
+                    <td style="text-align: left;">ILLUME+(stepwise)</td>
+                    <td>20.50</td>
+                    <td>2.00</td>
+                    <td>35.50</td>
+                    <td>19.53</td>
+                    <td>58.00</td>
+                    <td>21.00</td>
+                    <td>34.05</td>
+                    <td>27.13 | <span style="color:#FF5252">-6.22</span></td>
+                </tr>
+
+                <!-- Block 10 (Proprietary / standalone models) -->
+                <tr style="background-color: #fff4e6; color: #000;">
+                    <td style="text-align: left;">gpt4o</td>
+                    <td><b>45.25</b></td>
+                    <td>27.00</td>
+                    <td>34.50</td>
+                    <td><b>30.73</b></td>
+                    <td>58.00</td>
+                    <td><b>36.00</b></td>
+                    <td><b>43.73</b></td>
+                    <td><b>38.96</b> | --</td>
+                </tr>
+                <tr style="background-color: #fff; color: #000; border-bottom: 2px solid #000;">
+                    <td style="text-align: left;">ovis2.5</td>
+                    <td>44.00</td>
+                    <td><b>32.50</b></td>
+                    <td><b>43.00</b></td>
+                    <td>23.13</td>
+                    <td><b>89.00</b></td>
+                    <td>27.80</td>
+                    <td>42.28</td>
+                    <td>37.51 | --</td>
+                </tr>
+
+                <!-- Block 11 (Combined APIs / pipeline models) -->
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">GPT-4o + GPT-image</td>
+                    <td>32.75</td>
+                    <td>27.00</td>
+                    <td>30.50</td>
+                    <td>32.72</td>
+                    <td>60.00</td>
+                    <td>27.00</td>
+                    <td>40.54</td>
+                    <td>35.44 | --</td>
+                </tr>
+                <tr style="background-color: #fff; color: #000;">
+                    <td style="text-align: left;">gemini pro +nano banana pro</td>
+                    <td><b>71.50</b></td>
+                    <td><b>85.00</b></td>
+                    <td><b>91.00</b></td>
+                    <td><b>55.31</b></td>
+                    <td>68.00</td>
+                    <td><b>38.40</b></td>
+                    <td><b>61.12</b></td>
+                    <td><b>60.80</b> | --</td>
+                </tr>
+                <tr style="background-color: #fff; color: #000; border-bottom: 2px solid #000;">
+                    <td style="text-align: left;">Qwen2.5-7b+Qwen-edit</td>
+                    <td>33.75</td>
+                    <td>17.00</td>
+                    <td>31.50</td>
+                    <td>27.79</td>
+                    <td><b>80.00</b></td>
+                    <td>21.60</td>
+                    <td>38.56</td>
+                    <td>32.96 | --</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
 
 
 
@@ -691,50 +1044,16 @@
 		<hr class="mt-5">
 		<div class="container" style="margin-top: 30px">
 			<h1 class="text-center">Statistics</h1>
-			<!-- <div style="margin-top: 15px;">
-				<h3><strong>Perception Questions</strong></h3>
-				<ul style="line-height: 1.8;">
-					<li>
-						<strong>1) Optical Character Recognition (OCR):</strong> Questions that require extracting visual information, including formulas, data, charts, and handwritten content.
-					</li>
-					<li>
-						<strong>2) Automatic Speech Recognition (ASR):</strong> Questions that assess accurate transcription of spoken content.
-					</li>
-				</ul>
-			</div>
-			<div style="margin-top: 20px;">
-				<h3><strong>Comprehension Questions</strong></h3>
-				<ul style="line-height: 1.8;">
-					<li>
-						<strong>1) Concept Comprehension (CC):</strong> Questions that test conceptual understanding using multiple-answer multiple-choice (MAMC) format, presenting 4-10 statements with multiple possible correct answers.
-					</li>
-					<li>
-						<strong>2) Problem-solving Strategy Comprehension (PSC):</strong> Questions that assess understanding by presenting variants of video example questions with different values. These questions require applying the same reasoning process demonstrated in the video to new calculations.
-					</li>
-				</ul>
-			</div>
-			<div style="margin-top: 20px;">
-				<h3><strong>Adaptation Questions</strong></h3>
-				<ul style="line-height: 1.8;">
-					<li>
-						<strong>1) Case Study Analysis (CSA):</strong> Questions that test concept application to novel real-world scenarios.
-					</li>
-					<li>
-						<strong>2) Problem-solving Strategy Adaptation (PSA):</strong> Questions that assess the ability to modify learned solution methods for new problems by identifying key similarities and differences between examples and new scenarios.
-					</li>
-				</ul>
-			</div>
-			<p style="margin-top: 30px;">
-				We present 6 QA samples from Video-MMMU as follows:
-			</p> -->
+
 			<br>
 			<div class="image-viewer" style="margin-top: 20px; text-align: center;">
-				<img src="./assets/figures/figure3_0308.png" 
-					alt="Figure 3" 
-					style="width: 80%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-			</div>    
+				<img src="./overview_img/statistics.png"
+					alt="Figure 3"
+					style="width: 60%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+			</div>
 		</div>
 	</section>
+
 
 	<section id="Annotation Pipeline">
 		<hr class="mt-5">
@@ -750,584 +1069,724 @@
 		</div>
 	</section>
 	
-	<section id="Error Analysis">
-		<hr class="mt-5">
-		<div class="container" style="margin-top: 30px">
-			<h1 class="text-center">Error Analysis</h1>
-			<br>
-			<div class="image-viewer" style="margin-top: 20px; text-align: center;">
-				<img src="./assets/figures/error_analysis.png" 
-					alt="Figure 3" 
-					style="width: 50%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-			</div>    
-		</div>
-	</section>
+	<!-- ==================== 【ERROR ANALYSIS SECTION】 ==================== -->
+<section id="Error Analysis">
+    <hr class="mt-5">
+    <div class="container" style="margin-top: 30px">
+        <h1 class="text-center">Error Analysis: Failure Case Taxonomy</h1>
+        <br>
+        <p class="description text-left">
+            We present a unified <strong>three-way taxonomy</strong> of failure cases in generation-augmented understanding (G2U).
+            All examples are drawn from geometry, physics, charts, and factual QA tasks.
+            Successful generation must satisfy three criteria:
+        </p>
+        <ul style="line-height: 1.8; margin-left: 20px;">
+            <li><strong>Structural Validity</strong> – internally consistent geometry/physics</li>
+            <li><strong>Semantic Relevance</strong> – matches task entities and relations</li>
+            <li><strong>Reasoning Utility</strong> – actually reduces ambiguity or provides constraints</li>
+        </ul>
+        <p class="description text-left">
+            Violations of these criteria explain why generation often harms (or fails to help) understanding.
+            No “Wrong-to-Right” success cases were observed in the benchmark.
+        </p>
 
-	<section id="Error Examples in Adaptation track">
-		<hr class="mt-5">
-		<div class="container" style="margin-top: 30px">
-			<h1 class="text-center">Error Examples in Adaptation track</h1>
-			<br>
-			<div class="image-viewer" style="margin-top: 20px; text-align: center;">
-				<img src="./assets/figures/error_case_adaptation.png" 
-					alt="Figure 3" 
-					style="width: 80%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-			</div>    
-		</div>
-	</section>
+    </div>
+</section>
 
-	<section id="Wrong-to-Right Examples in Adaptation track">
-		<hr class="mt-5">
-		<div class="container" style="margin-top: 30px">
-			<h1 class="text-center">Wrong-to-Right Examples in Adaptation track</h1>
-			<br>
-			<div class="image-viewer" style="margin-top: 20px; text-align: center;">
-				<img src="./assets/figures/wrongtoright.png" 
-					alt="Figure 3" 
-					style="width: 80%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-			</div>    
-		</div>
-	</section>
+<!-- ==================== 【ERROR EXAMPLES IN ADAPTATION TRACK】 ==================== -->
+<section id="Error Examples in Adaptation track">
+    <hr class="mt-5">
+    <div class="container" style="margin-top: 30px">
+        <h1 class="text-center">Error Examples</h1>
+        <br>
+        <p class="text-center text-muted">Three representative failure modes observed when models attempt stepwise generation before answering.</p>
+
+        <!-- Category I: Capability Failure -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3>Category I: Capability Failure</h3>
+                <p class="description">
+                    Generated diagrams are geometrically distorted, quantitatively invalid, or physically impossible.
+                    Downstream solver inherits or amplifies these errors.
+                </p>
+            </div>
+            <!-- Example 1 -->
+            <div class="col-md-6 mb-4">
+                <div class="row">
+                    <div class="col-6">
+                        <img src="./assets/appendix/category1_1_原图.png" class="img-fluid rounded" alt="Original">
+                        <p class="text-center small mt-2"><strong>Original</strong><br>Find length of BP</p>
+                    </div>
+                    <div class="col-6">
+                        <img src="./assets/appendix/category1_1_case.png" class="img-fluid rounded" alt="Generated by Bagel">
+                        <p class="text-center small mt-2"><strong>Generated (Bagel)</strong><br>Geometrically inconsistent</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Example 2 -->
+            <div class="col-md-6 mb-4">
+                <div class="row">
+                    <div class="col-6">
+                        <img src="./assets/appendix/category1_2_原图.png" class="img-fluid rounded" alt="Original">
+                        <p class="text-center small mt-2"><strong>Original</strong><br>Dihedral angle E-AC-B = 60°</p>
+                    </div>
+                    <div class="col-6">
+                        <img src="./assets/appendix/category1_2_case.png" class="img-fluid rounded" alt="Generated by Bagel">
+                        <p class="text-center small mt-2"><strong>Generated (Bagel)</strong><br>Physically invalid</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category II: Surface-Relevant but Non-Utility -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3>Category II: Surface-Relevant but Non-Utility Generation</h3>
+                <p class="description">
+                    Diagram is “on-topic” yet adds zero computational benefit or missing operational structure.
+                </p>
+            </div>
+            <!-- Example 1 -->
+            <div class="col-md-6 mb-4">
+                <div class="row">
+                    <div class="col-6">
+                        <img src="./assets/appendix/category2_1_原图.png" class="img-fluid rounded" alt="Original">
+                        <p class="text-center small mt-2"><strong>Original (Geometry)</strong></p>
+                    </div>
+                    <div class="col-6">
+                        <img src="./assets/appendix/category2_1_case.png" class="img-fluid rounded" alt="Generated by Bagel">
+                        <p class="text-center small mt-2"><strong>Generated (Bagel)</strong><br>Correct but adds no utility</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Example 2 -->
+            <div class="col-md-6 mb-4">
+                <div class="row">
+                    <div class="col-6">
+                        <img src="./assets/appendix/category2_2_原图.png" class="img-fluid rounded" alt="Original">
+                        <p class="text-center small mt-2"><strong>Original (Maze)</strong></p>
+                    </div>
+                    <div class="col-6">
+                        <img src="./assets/appendix/category2_2_case.png" class="img-fluid rounded" alt="Generated by GPT-4o+image">
+                        <p class="text-center small mt-2"><strong>Generated (GPT-4o + GPT-image)</strong><br>No valid connectivity/path</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category III: Irrelevant Generation -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3>Category III: Irrelevant Generation</h3>
+                <p class="description">
+                    Generated image has no meaningful relation to the task (chart data lost, factual QA triggers unnecessary drawing).
+                </p>
+            </div>
+            <!-- Example 1 -->
+            <div class="col-md-6 mb-4">
+                <div class="row">
+                    <div class="col-6">
+                        <img src="./assets/appendix/category3_1_原图.png" class="img-fluid rounded" alt="Original ChartQA">
+                        <p class="text-center small mt-2"><strong>Original (ChartQA)</strong></p>
+                    </div>
+                    <div class="col-6">
+                        <img src="./assets/appendix/category3_1_case.png" class="img-fluid rounded" alt="Generated by GPT-4o+image">
+                        <p class="text-center small mt-2"><strong>Generated (GPT-4o + GPT-image)</strong><br>Not a structured chart</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Example 2 -->
+            <div class="col-md-6 mb-4">
+                <div class="row">
+                    <div class="col-6">
+                        <img src="./assets/appendix/knowledge_case1_original.png" class="img-fluid rounded" alt="Original Knowledge QA">
+                        <p class="text-center small mt-2"><strong>Original (Knowledge QA)</strong><br>“What is the value of Czechia?”</p>
+                    </div>
+                    <div class="col-6">
+                        <img src="./assets/appendix/knowledge_case1_generated.png" class="img-fluid rounded" alt="Generated by STAR-7B">
+                        <p class="text-center small mt-2"><strong>Generated (STAR-7B)</strong><br>Completely unrelated visual</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-center mt-5 text-muted">
+            These cases demonstrate that generation alone does not guarantee improved understanding.
+            Only when the intermediate visual satisfies validity + relevance + utility does G2U actually help.
+        </p>
+    </div>
+</section>
+
+    <!-- ==================== 【WHY THESE FAILURES OCCUR】 ==================== -->
+<!-- 放在 “Error Examples in Adaptation track” 之后 -->
+
+
+
+
 
 	
 	<section id="Art">
-		<hr class="mt-5">
+    <hr class="mt-5">
+    <div class="container text-center" style="margin-top: 30px">
+        <!-- Section Title -->
+        <h2 class="section-title">Examples - Puzzles and Games</h2>
+        <!-- 五图轮播（已修复 + 宽度调整） -->
+        <div id="artCarousel" class="carousel slide"
+             data-ride="carousel"
+             data-interval="5000"
+             style="max-width: 980px; margin: 0 auto 30px;">
+            <ol class="carousel-indicators">
+                <li data-target="#artCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#artCarousel" data-slide-to="1"></li>
+                <li data-target="#artCarousel" data-slide-to="2"></li>
+                <li data-target="#artCarousel" data-slide-to="3"></li>
+                <li data-target="#artCarousel" data-slide-to="4"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./assets/seven_categories_carousel/Puzzles%20and%20Games/jigsaw1.png" class="d-block w-100" alt="Jigsaw 1"
+                         style="height: 520px; object-fit: contain;">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/seven_categories_carousel/Puzzles%20and%20Games/jigsaw2.png" class="d-block w-100" alt="Jigsaw 2"
+                         style="height: 520px; object-fit: contain;">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/seven_categories_carousel/Puzzles%20and%20Games/jigsaw3.png" class="d-block w-100" alt="Jigsaw 3"
+                         style="height: 520px; object-fit: contain;">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/seven_categories_carousel/Puzzles%20and%20Games/maze.png" class="d-block w-100" alt="Maze Puzzle"
+                         style="height: 520px; object-fit: contain;">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/seven_categories_carousel/Puzzles%20and%20Games/sliding.png" class="d-block w-100" alt="Sliding Puzzle"
+                         style="height: 520px; object-fit: contain;">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#artCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#artCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <!-- Question Tracks（保持你原来的完整prompt） -->
+        <div class="tracks-row flex" style="margin-top: 20px;">
+            <!-- Perception Track - Jigsaw -->
+            <div class="track">
+                <div class="track-title perception">Jigsaw</div>
+                <div class="track-content">
+                    <p><strong>Question:</strong> You are a unified vision-language model. You will be given: (1) a 2×2 reference image with the bottom-right cell hidden, and (2) two candidate patch images ("Candidate 0" and "Candidate 1"). Your job: - Mentally visualize placing each candidate into the bottom-right cell. - Compare which candidate yields the correct completion based on seam continuity, color/texture gradient, structural alignment, and global semantics. Output EXACTLY the following: 1) Brief analysis comparing the two candidates 2) One strict JSON object with your decision, wrapped as: &lt;FINAL_ANSWER_JSON&gt; {"choice": 0 or 1, "rationale": "≤30 words decisive cue"} &lt;/FINAL_ANSWER_JSON&gt;</p>
+                    <p><strong>Ground truth: </strong>{"choice": 0}</p>
+                </div>
+            </div>
+            <!-- Comprehension Track - Maze -->
+            <div class="track">
+                <div class="track-title comprehension">Maze</div>
+                <div class="track-content">
+                    <p><strong>Question:</strong> You are a precise maze solver. SEMANTICS - Black squares: walls (impassable) - White squares: path (walkable) - Blue dot: start (the agent) - Green rectangular frame: goal (reaching any white cell inside the green frame counts as success) - Legal moves: up, down, left, right only. One cell per step; no diagonals, no jumps; never cross walls. OUTPUT FORMAT 1) Briefly describe your reasoning for the path. 2) Output the final move list as a JSON array of lowercase strings, wrapped as: &lt;ANSWER_JSON&gt;["right","down","left"]&lt;/ANSWER_JSON&gt;</p>
+                    <p><strong>Ground truth: </strong> ["up", "up", "right", "right", "down", "down", "down", "down"] </p>
+                </div>
+            </div>
+            <!-- Adaptation Track - Sliding -->
+            <div class="track">
+                <div class="track-title adaptation">Sliding</div>
+                <div class="track-content">
+                    <p><strong>Question:</strong> You are a precise sliding puzzle solver. TASK - You will be given an INITIAL state of a 3x3 sliding puzzle. - The goal is to find the sequence of moves to solve the puzzle. SEMANTICS - The puzzle is a 3x3 grid with 8 colored tiles and one empty space. - The RED square represents the EMPTY space. - A "move" consists of sliding an adjacent colored tile INTO the empty (red) space. - Moves are named by the direction the COLORED TILE moves. OUTPUT FORMAT 1) Briefly describe your reasoning for the solution. 2) Output the final move list as a JSON array of lowercase strings, wrapped as: &lt;ANSWER_JSON&gt;["down","right","up"]&lt;/ANSWER_JSON&gt;</p>
+                    <p><strong>Ground truth: </strong> ["left", "down", "left", "up", "up"] </ANSWER_JSON>
+</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- <hr class="mt-5"> -->
 
-		<div class="container text-center" style="margin-top: 30px">
-			<h1>Video-MMMU Examples</h1>
-			<br>
-			<br>
-			<!-- Section Title -->
-			<h2 class="section-title">Video-MMMU Examples - Art</h2>
-			<!-- YouTube Video -->
-			<div class="youtube-container" style="margin-top: 30px">
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/Enej5kRTpW4?si=2nsQajSKBBtM-FFe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			</div>
-	
-			<!-- Question Tracks -->
-			<div class="tracks-row flex" style="margin-top: 20px;">
-				<!-- Perception Track -->
-				<div class="track">
-					<div class="track-title perception">Perception Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> Which of the following does NOT appear in the video frame when the video introduces Painting?</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>Intense, warm colors</li>
-							<li>Strong contrasts of light and dark</li>
-							<li>Focus on movement, drama, and emotion</li>
-							<li>Abstraction</li>
-							<li>Allegory</li>
-							<li>Enhanced sense of movement</li>
-							<li>Deliberately set apart from Renaissance and Mannerism</li>
-							<li>Asymmetry</li>
-							<li>Renaissance</li>
-							<li>Mannerism</li>
-						</ol>
-						<p><strong>Ground truth: </strong>D. Abstraction</p>
-					</div>
-				</div>
+    <section id="Business">
+    <hr class="mt-5">
+    <div class="container text-center" style="margin-top: 30px">
+        <!-- Section Title -->
+        <h2 class="section-title">Examples - Chart &
+Table Reasoning</h2>
+        <!-- 三个图表轮播（Bootstrap Carousel，已内置） -->
+        <div id="businessCarousel" class="carousel slide mb-4" data-ride="carousel" data-interval="5000">
+            <ol class="carousel-indicators">
+                <li data-target="#businessCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#businessCarousel" data-slide-to="1"></li>
+                <li data-target="#businessCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <!-- 图1 -->
+                <div class="carousel-item active">
+                    <img src="./assets/seven_categories_carousel/chartga/chartqa1.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Agriculture Orientation Index">
+                </div>
+                <!-- 图2 -->
+                <div class="carousel-item">
+                    <img src="./assets/seven_categories_carousel/chartga/chartqa2.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Mortality Rates Bahrain">
+                </div>
+                <!-- 图3 -->
+                <div class="carousel-item">
+                    <img src="./assets/seven_categories_carousel/chartga/chartqa3.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Investment by Sector Mexico">
+                </div>
+            </div>
+            <!-- 左右箭头 -->
+            <a class="carousel-control-prev" href="#businessCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#businessCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <!-- Question Tracks（已按你要求修改问题） -->
+        <div class="tracks-row flex" style="margin-top: 20px;">
+            <!-- Perception Track -->
+            <div class="track">
+                <div class="track-title perception">Chartqa</div>
+                <div class="track-content">
+                    <p><strong>Question:</strong> What is the value of Czechia?</p>
+                </div>
+            </div>
+            <!-- Comprehension Track -->
+            <div class="track">
+                <div class="track-title comprehension">Chartqa</div>
+                <div class="track-content">
+                    <p><strong>Question:</strong> When does the gap between Child before age 5 and neonatal become largest?</p>
+                </div>
+            </div>
+            <!-- Adaptation Track -->
+            <div class="track">
+                <div class="track-title adaptation">Chartqa</div>
+                <div class="track-content">
+                    <p><strong>Question:</strong> How much of the total investment received by Mexico was from the manufacturing industry as of September 2020?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- <hr class="mt-5"> -->
 
-				<!-- Comprehension Track -->
-				<div class="track">
-					<div class="track-title comprehension">Comprehension Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> Based on your understanding of the video, which of the following statements about Baroque painting is/are correct?</p>
-						<ul>
-							<li>Statement 1. Baroque paintings focused on calm, balanced scenes with even lighting.</li>
-							<li>Statement 2. Baroque artists used strong contrasts of light and dark to highlight key figures.</li>
-							<li>Statement 3. Baroque painting was known for symmetrical compositions and a sense of stability.</li>
-							<li>Statement 4. Baroque artists avoided using allegory in their works.</li>
-						</ul>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>Statement 1 is correct</li>
-							<li>Statement 1 and 2 are correct</li>
-							<li>Statement 1, 2, and 3 are correct</li>
-							<li>Statement 1, 3, and 4 are correct</li>
-							<li>Statement 2 and 4 are correct</li>
-							<li>Statement 3 is correct</li>
-							<li>Statements 1 and 4 are correct</li>
-							<li>Statements 1, 3, and 4 are correct</li>
-							<li>Statement 2 is correct</li>
-							<li>All are correct</li>
-						</ol>
-						<p><strong>Ground truth: </strong>I. Statement 2 is correct</p>
-					</div>
-				</div>
+    <section id="Humanities">
+    <hr class="mt-5">
+    <div class="container text-center" style="margin-top: 30px">
+        <!-- Section Title -->
+        <h2 class="section-title">Examples - Mathematical
+Reasoning</h2>
+        <!-- 三个图片轮播（完全模仿 Business 部分的样式） -->
+        <div id="humanitiesCarousel" class="carousel slide mb-4" data-ride="carousel" data-interval="5000">
+            <ol class="carousel-indicators">
+                <li data-target="#humanitiesCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#humanitiesCarousel" data-slide-to="1"></li>
+                <li data-target="#humanitiesCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <img src="./assets/seven_categories_carousel/Mathematical%20Reasoning/auxsolidmath1.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="auxsolidmath1">
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <img src="./assets/seven_categories_carousel/Mathematical%20Reasoning/auxsolidmath2.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="auxsolidmath2">
+                </div>
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <img src="./assets/seven_categories_carousel/Mathematical%20Reasoning/geometry.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="geometry">
+                </div>
+            </div>
+            <!-- 左右箭头 -->
+            <a class="carousel-control-prev" href="#humanitiesCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#humanitiesCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <!-- Question Tracks（按你要求的顺序） -->
+        <div class="tracks-row flex" style="margin-top: 20px;">
+            <!-- Perception Track -->
+            <div class="track">
+                <div class="track-title perception">Auxsolidmath</div>
+                <div class="track-content">
+                    <p><strong>Question:</strong> As shown in the diagram, the base ABCD is a square with side length 2, and the semicircular surface APD is perpendicular to the base ABCD. Point P is a moving point on the arc AD. Find the cosine value of the dihedral angle P-BC-D when the volume of the tetrahedron P-BCD is maximized.</p>
+                    <p><strong>Auxiliary Line Description:</strong> Take O as the midpoint of AD, and draw Ox parallel to AB. Take O as the origin, and let the lines along Ox, OD, and OP be the x-axis, y-axis, and z-axis, respectively, then establish the three-dimensional Cartesian coordinate system O-xyz.</p>
+                    <p><strong>Ground truth: </strong>2√5/5</p>
+                </div>
+            </div>
+            <!-- Comprehension Track -->
+            <div class="track">
+                <div class="track-title comprehension">Auxsolidmath</div>
+                <div class="track-content">
+                    <p><strong>Question:</strong> As shown in the diagram, in the cube ABCD – A₁B₁C₁D₁, point P is a moving point on segment AB₁ (including endpoints), and point Q is the midpoint of segment AC. Let θ be the angle between PQ and plane ACD₁. Determine the minimum value of cosθ.</p>
+                    <p><strong>Auxiliary Line Description:</strong> Take D as the origin, and let the lines along DA, DC, and DD₁ be the x-axis, y-axis, and z-axis, respectively, then establish the three-dimensional Cartesian coordinate system D-xyz.</p>
+                    <p><strong>Ground truth: </strong>1/3</p>
+                </div>
+            </div>
+            <!-- Adaptation Track -->
+            <div class="track">
+                <div class="track-title adaptation">Geometry3k</div>
+                <div class="track-content">
+                    <p><strong>Question:</strong> Find tan B</p>
+                    <p>
+                        <img src="./assets/seven_categories_carousel/Mathematical%20Reasoning/geometry.png" alt="Geometry Diagram" style="max-width: 100%; height: auto; display: block; margin: 10px auto;">
+                    </p>
+                    <p><strong>Ground truth: </strong>5</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- <hr class="mt-5"> -->
 
-				<!-- Adaptation Track -->
-				<div class="track">
-					<div class="track-title adaptation">Adaptation Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> On the basis of style, this painting belongs to which of the following periods?</p>
-						<p>
-							<img src="./assets/samples/images_for_adaptation_track/new_Art_Theory_6.jpg" alt="Painting for Adaptation Question" style="max-width: 100%; height: auto; display: block; margin: 10px auto;" />
-						</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>Rococo</li>
-							<li>Gothic</li>
-							<li>Renaissance</li>
-							<li>Baroque</li>
-							<li>Neoclassicism</li>
-							<li>Byzantine</li>
-							<li>Mannerism</li>
-							<li>Romanticism</li>
-							<li>Art Nouveau</li>
-							<li>Classical</li>
-						</ol>
-						<p><strong>Ground truth: </strong>I. Baroque</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- <hr class="mt-5"> -->
-	
-	<section id="Business">
-		<hr class="mt-5">
-		<div class="container text-center" style="margin-top: 30px">
-			<!-- Section Title -->
-			<h2 class="section-title">Video-MMMU Examples - Business</h2>
-			<!-- YouTube Video -->
-			<div class="youtube-container">
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/ix03LGUQC7s?si=2eVRDUBESAGFeXfP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			</div>
-	
-			<!-- Question Tracks -->
-			<div class="tracks-row flex" style="margin-top: 20px;">
-				<!-- Perception Track -->
-				<div class="track">
-					<div class="track-title perception">Perception Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> According to the video, a minimum price control for alcoholic drinks, the intention is to discourage consumption from Q1 to ____, due to the negative externalities, and the price is raised to ____ from the free market price of ____. Fill in the blanks based on the video content.</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>(Q*, Pmin, P1)</li>
-							<li>(Q*, P1, Pmin)</li>
-							<li>(Q1, Pmin, P2)</li>
-							<li>(Q2, P1, Pmin)</li>
-							<li>(Q*, P2, P1)</li>
-							<li>(Q1, P2, Pmin)</li>
-							<li>(Q2, Pmin, P1)</li>
-							<li>(Q*, Pmin, P2)</li>
-							<li>(Q2, P2, P1)</li>
-							<li>(Q1, P1, Pmin)</li>
-						</ol>
-						<p><strong>Ground truth: </strong>A. (Q*, Pmin, P1)</p>
-					</div>
-				</div>
-	
-				<!-- Comprehension Track -->
-				<div class="track">
-					<div class="track-title comprehension">Comprehension Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> Based on your understanding, what is the correct sequence of consequences when a minimum price is imposed on a good with negative externalities in consumption?</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>Free market equilibrium at P1 and Q1 → Minimum price imposed above P1 → Consumption contracts to Q* → Externality internalized.</li>
-							<li>Minimum price imposed above P1 → Free market equilibrium at P1 and Q1 → Consumption contracts to Q* → Externality internalized.</li>
-							<li>Free market equilibrium at P1 and Q1 → Consumption contracts to Q* → Minimum price imposed above P1 → Externality internalized.</li>
-							<li>Externality internalized → Free market equilibrium at P1 and Q1 → Minimum price imposed above P1 → Consumption contracts to Q*.</li>
-							<li>Minimum price imposed above P1 → Consumption contracts to Q* → Externality internalized → Free market equilibrium at P1 and Q1.</li>
-							<li>Consumption contracts to Q* → Minimum price imposed above P1 → Free market equilibrium at P1 and Q1 → Externality internalized.</li>
-							<li>Free market equilibrium at P1 and Q1 → Minimum price imposed above P1 → Externality internalized → Consumption contracts to Q*.</li>
-							<li>Minimum price imposed above P1 → Free market equilibrium at P1 and Q1 → Externality internalized → Consumption contracts to Q*.</li>
-							<li>Externality internalized → Minimum price imposed above P1 → Free market equilibrium at P1 and Q1 → Consumption contracts to Q*.</li>
-							<li>Consumption contracts to Q* → Externality internalized → Minimum price imposed above P1 → Free market equilibrium at P1 and Q1.</li>
-						</ol>
-						<p><strong>Ground truth: </strong>A. Free market equilibrium at P1 and Q1 → Minimum price imposed above P1 → Consumption contracts to Q* → Externality internalized.</p>
-					</div>
-				</div>
-	
-				<!-- Adaptation Track -->
-				<div class="track">
-					<div class="track-title adaptation">Adaptation Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> Suppose the government decided that, since gasoline is a necessity, its price should be legally capped at $1.30 per gallon. What do you anticipate would be the outcome in the gasoline market?</p>
-						<p>
-							<img src="./assets/samples/images_for_adaptation_track/validation_Economics_2.png" alt="Gasoline Market Question" style="max-width: 100%; height: auto; display: block; margin: 10px auto;" />
-						</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>A price below that of $1.30 would cause a situation of excess demand and hence a surplus.</li>
-							<li>A price below that of $1.30 would cause a situation of excess demand and hence a shortage.</li>
-							<li>Not certain.</li>
-							<li>A price above that of $1.30 would cause a situation of excess demand and hence a shortage.</li>
-							<li>A price above that of $1.30 would cause a situation of excess supply and hence a shortage.</li>
-							<li>A price at $1.30 per gallon would result in an equilibrium where supply meets demand.</li>
-							<li>A price below that of $1.30 would cause a situation of excess supply and hence a surplus.</li>
-							<li>A price at $1.30 would eliminate any market shortages or surpluses.</li>
-							<li>A price of $1.30 would result in both excess demand and excess supply, depending on consumer preferences.</li>
-							<li>All situations are possible.</li>
-						</ol>
-						<p><strong>Ground truth: </strong>B. A price below that of $1.30 would cause a situation of excess demand and hence a shortage.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- <hr class="mt-5"> -->
-	
-	<section id="Humanities">
-		<hr class="mt-5">
-		<div class="container text-center" style="margin-top: 30px">
-			<!-- Section Title -->
-			<h2 class="section-title">Video-MMMU Examples - Humanities</h2>
-			<!-- YouTube Video -->
-			<div class="youtube-container">
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/1PnAVfnCG10?si=XDlObPB1DR54DQt8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			</div>
-	
-			<!-- Question Tracks -->
-			<div class="tracks-row flex" style="margin-top: 20px;">
-				<!-- Perception Track -->
-				<div class="track">
-					<div class="track-title perception">Perception Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> Based on the video, fill in the blanks about the Functionalist view of society's culture:</p>
-						<p>"Functionalists take a ________ view on society's culture and suggest it ________."</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>Consensus, reflects the norms and values of the majority — a value consensus</li>
-							<li>Unified, represents shared practices and beliefs of a group</li>
-							<li>Conflict, reveals power struggles and competing interests within society</li>
-							<li>Critical, critiques the dominant traditions that maintain inequalities</li>
-							<li>Conservative, emphasizes the preservation of societal expectations</li>
-							<li>Agreement, highlights the shared opinions and moral agreements</li>
-							<li>Progressive, encourages the development of new cultural ideologies</li>
-							<li>Stratified, reflects the rules that structure society into classes</li>
-							<li>Divisive, showcases the competing customs and traditions in society</li>
-							<li>Analytical, breaks down societal structures into individual roles</li>
-						</ol>
-						<p><strong>Ground truth: </strong>A. Consensus, reflects the norms and values of the majority — a value consensus</p>
-					</div>
-				</div>
-	
-				<!-- Comprehension Track -->
-				<div class="track">
-					<div class="track-title comprehension">Comprehension Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> Based on your understanding, which of the following statements about different sociological theories on culture is/are false?</p>
-						<p><strong>Statements:</strong></p>
-						<ul>
-							<li>Statement 1. Functionalists argue that society's culture is fragmented, and individuals create their own norms based on personal preferences and life experiences.</li>
-							<li>Statement 2. Marxists suggest that culture is imposed by the ruling class (bourgeoisie) to maintain control over the working class and reinforce capitalist ideologies.</li>
-							<li>Statement 3. Feminists believe that culture is male-dominated and reflects patriarchal values, prioritizing men's interests over women's.</li>
-							<li>Statement 4. Postmodernists suggest that there is a single dominant culture, and individuals can choose their own cultural norms.</li>
-						</ul>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>Statement 1 is false</li>
-							<li>Statement 2 is false</li>
-							<li>Statement 3 is false</li>
-							<li>Statement 4 is false</li>
-							<li>Statements 1 and 2 are false</li>
-							<li>Statements 3 and 4 are false</li>
-							<li>Statements 1 and 4 are false</li>
-							<li>Statements 1 and 3 are false</li>
-							<li>Statements 2 and 4 are false</li>
-							<li>None of the statements are false</li>
-						</ol>
-						<p><strong>Ground truth: </strong>G. Statements 1 and 4 are false</p>
-					</div>
-				</div>
-	
-				<!-- Adaptation Track -->
-				<div class="track">
-					<div class="track-title adaptation">Adaptation Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> Identify the theory that the following argument represents.</p>
-						<p>
-							<img src="./assets/samples/images_for_adaptation_track/sociology_4.png" alt="Gasoline Market Question" style="max-width: 100%; height: auto; display: block; margin: 10px auto;" />
-						</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>Functionalism</li>
-							<li>Marxism</li>
-							<li>New Right</li>
-							<li>Postmodernism</li>
-							<li>Social action approaches</li>
-							<li>Interactionism</li>
-							<li>Feminism</li>
-							<li>Conflict Theory</li>
-							<li>Modernity</li>
-							<li>Positivists</li>
-						</ol>
-						<p><strong>Ground truth: </strong>Functionalism</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- <hr class="mt-5"> -->
-	
-	<section id="Science">
-		<hr class="mt-5">
-		<div class="container text-center" style="margin-top: 30px">
-			<!-- Section Title -->
-			<h2 class="section-title">Video-MMMU Examples - Science</h2>
-			<!-- YouTube Video -->
-			<div class="youtube-container">
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/TQSvfrSJucI?si=xNUh5Ny5annIfdId" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			</div>
-	
-			<!-- Question Tracks -->
-			<div class="tracks-row flex" style="margin-top: 20px;">
-				<!-- Perception Track -->
-				<div class="track">
-					<div class="track-title perception">Perception Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> What is the equation used when solving the first question in the video?</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>y = v<sub>0y</sub> t + 1/2 g t<sup>2</sup></li>
-							<li>y = y<sub>0</sub> + v<sub>0x</sub> t - 1/2 g t<sup>2</sup></li>
-							<li>y = v<sub>0x</sub> t + g t<sup>2</sup></li>
-							<li>y = y<sub>0</sub> + v<sub>0y</sub> t - 1/2 g t<sup>2</sup></li>
-							<li>y = v<sub>0y</sub> t - g t</li>
-							<li>y = y<sub>0</sub> + v<sub>0x</sub> t + 1/2 g t<sup>2</sup></li>
-							<li>y = y<sub>0</sub> + g t</li>
-							<li>y = y<sub>0</sub> + v<sub>0y</sub> t + g t<sup>2</sup></li>
-							<li>y = v<sub>0x</sub> t + 1/2 g t<sup>2</sup></li>
-							<li>y = y<sub>0</sub> + 1/2 g t<sup>2</sup></li>
-						</ol>
-						<p><strong>Ground truth: </strong>D. y = y<sub>0</sub> + v<sub>0y</sub> t - 1/2 g t<sup>2</sup></p>
-					</div>
-				</div>
-	
-				<!-- Comprehension Track -->
-				<div class="track">
-					<div class="track-title comprehension">Comprehension Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> If the angle theta is changed to 30 degrees, what is the result of the first question about the total time in the air?</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>4.00 seconds</li>
-							<li>2.82 seconds</li>
-							<li>3.50 seconds</li>
-							<li>2.50 seconds</li>
-							<li>3.04 seconds</li>
-							<li>2.00 seconds</li>
-							<li>3.15 seconds</li>
-							<li>1.85 seconds</li>
-							<li>2.25 seconds</li>
-							<li>3.85 seconds</li>
-						</ol>
-						<p><strong>Ground truth: </strong>E. 3.04 seconds</p>
-					</div>
-				</div>
-	
-				<!-- Adaptation Track -->
-				<div class="track">
-					<div class="track-title adaptation">Adaptation Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> A rocket is shot from the top of a tower at an angle of 45° above the horizontal (Fig. 19-1). It hits the ground in 5 seconds at a horizontal distance from the foot of the tower equal to three times the height of the tower. Find the height of the tower.</p>
-						<p>
-							<img src="./assets/samples/images_for_adaptation_track/science_math_23.png" alt="Rocket Adaptation Question" style="max-width: 100%; height: auto; display: block; margin: 10px auto;" />
-						</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>h = 100 ft</li>
-							<li>h = 80 ft</li>
-							<li>h = 110 ft</li>
-							<li>h = 85 ft</li>
-							<li>h = 90 ft</li>
-							<li>h = 95 ft</li>
-							<li>h = 105 ft</li>
-							<li>h = 120 ft</li>
-							<li>h = 75 ft</li>
-							<li>h = 115 ft</li>
-						</ol>
-						<p><strong>Ground truth: </strong>A. h = 100 ft</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- <hr class="mt-5"> -->
-	
-	<section id="Medicine">
-		<hr class="mt-5">
-		<div class="container text-center" style="margin-top: 30px">
-			<!-- Section Title -->
-			<h2 class="section-title">Video-MMMU Examples - Medicine</h2>
-			<!-- YouTube Video -->
-			<div class="youtube-container">
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/FI3-28tdovk?si=ckgiWJUK0speh1Ec" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			</div>
-	
-			<!-- Question Tracks -->
-			<div class="tracks-row flex" style="margin-top: 20px;">
-				<!-- Perception Track -->
-				<div class="track">
-					<div class="track-title perception">Perception Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> At the beginning of the video, what are the muscles in the lower left corner, upper left corner, and lower right corner, respectively?</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>Cardiac muscle, Smooth muscle, Skeletal muscle</li>
-							<li>Skeletal muscle, Cardiac muscle, Smooth muscle</li>
-							<li>Skeletal muscle, Smooth muscle, Cardiac muscle</li>
-							<li>Smooth muscle, Cardiac muscle, Skeletal muscle</li>
-							<li>Smooth muscle, Skeletal muscle, Cardiac muscle</li>
-							<li>Smooth muscle, Cardiac muscle, Cardiac muscle</li>
-							<li>Skeletal muscle, Skeletal muscle, Smooth muscle</li>
-							<li>Cardiac muscle, Smooth muscle, Smooth muscle</li>
-							<li>Skeletal muscle, Smooth muscle, Smooth muscle</li>
-							<li>Cardiac muscle, Skeletal muscle, Smooth muscle</li>
-						</ol>
-						<p><strong>Ground truth: </strong>J. Cardiac muscle, Skeletal muscle, Smooth muscle</p>
-					</div>
-				</div>
-	
-				<!-- Comprehension Track -->
-				<div class="track">
-					<div class="track-title comprehension">Comprehension Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> Based on the video, how many of the following characteristics can be used to identify the different types of muscle tissue?</p>
-						<p>Characteristics:</p>
-						<ul>
-							<li>(c1). Presence of striations</li>
-							<li>(c2). Presence of intercalated discs</li>
-							<li>(c3). Voluntary control</li>
-							<li>(c4). Involuntary control</li>
-							<li>(c5). Branching appearance</li>
-							<li>(c6). Smooth, spindle-shaped cells</li>
-							<li>(c7). Long, cylindrical fibers</li>
-							<li>(c8). Multinucleated cells</li>
-							<li>(c9). Location</li>
-						</ul>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>0</li>
-							<li>1</li>
-							<li>2</li>
-							<li>3</li>
-							<li>4</li>
-							<li>5</li>
-							<li>6</li>
-							<li>7</li>
-							<li>8</li>
-							<li>9</li>
-						</ol>
-						<p><strong>Ground truth: </strong>H. 7</p>
-					</div>
-				</div>
-	
-				<!-- Adaptation Track -->
-				<div class="track">
-					<div class="track-title adaptation">Adaptation Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> What kind of tissue does this image depict?</p>
-						<p>
-							<img src="./assets/samples/images_for_adaptation_track/medicine_11.jpg" alt="Muscle Tissue Question" style="max-width: 100%; height: auto; display: block; margin: 10px auto;" />
-						</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>Cardiac muscle</li>
-							<li>Skeletal muscle</li>
-							<li>Cartilage</li>
-							<li>Smooth muscle</li>
-							<li>Tendon</li>
-							<li>Ligament</li>
-							<li>Adipose tissue</li>
-							<li>Epithelium</li>
-							<li>Connective tissue</li>
-							<li>Nerve tissue</li>
-						</ol>
-						<p><strong>Ground truth: </strong>A. Cardiac muscle</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- <hr class="mt-5"> -->
-	
-	<section id="Engineering">
-		<hr class="mt-5">
-		<div class="container text-center" style="margin-top: 30px">
-			<!-- Section Title -->
-			<h2 class="section-title">Video-MMMU Examples - Engineering</h2>
-			<!-- YouTube Video -->
-			<div class="youtube-container">
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/LnF-dYhi8JE?si=B5X6V7WeJOn0Dv6y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-			</div>
-	
-			<!-- Question Tracks -->
-			<div class="tracks-row flex" style="margin-top: 20px;">
-				<!-- Perception Track -->
-				<div class="track">
-					<div class="track-title perception">Perception Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> Identify the correct sequence of steps to construct the minimum spanning tree using Kruskal's algorithm from the graph described in the video.</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>Add CF, add AC, add EF, add BC, add FG.</li>
-							<li>Add BE, add EF, add CF, add BC, add FG.</li>
-							<li>Add BE, add EF, add FG, add BC, add CD.</li>
-							<li>Add BE, add AC, add EF, add FC, add CD.</li>
-							<li>Add BE, add BC, add AC, add EF, add FG.</li>
-							<li>Add BE, add AC, add DF, add BC, add CD.</li>
-							<li>Add BE, add AC, add EF, add BC, add FG.</li>
-							<li>Add BE, add AC, add DF, add FG, add BC.</li>
-							<li>Add BE, add EF, add BC, add FG, add CD.</li>
-							<li>Add BE, add AC, add FG, add EF, add BC.</li>
-						</ol>
-						<p><strong>Ground truth: </strong>G. Add BE, add AC, add EF, add BC, add FG.</p>
-					</div>
-				</div>
-	
-				<!-- Comprehension Track -->
-				<div class="track">
-					<div class="track-title comprehension">Comprehension Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> Based on the graph example in the video, if you apply Kruskal's algorithm and the weight of the first few edges changes slightly, which would be the resulting edge sequence if the edge BE now has a weight of 1 and EF a weight of 0.5?</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>EF, AC, BE, BC, FG</li>
-							<li>BE, EF, AC, FG, BC</li>
-							<li>BE, AC, BC, EF, FG</li>
-							<li>AC, BE, EF, BC, FG</li>
-							<li>EF, BE, FG, AC, BC</li>
-							<li>EF, BE, AC, BC, FG</li>
-							<li>BE, EF, FG, BC, AC</li>
-							<li>EF, AC, BC, BE, FG</li>
-							<li>BE, AC, FG, EF, BC</li>
-							<li>AC, FG, BE, EF, BC</li>
-						</ol>
-						<p><strong>Ground truth: </strong>F. EF, BE, AC, BC, FG</p>
-					</div>
-				</div>
-	
-				<!-- Adaptation Track -->
-				<div class="track">
-					<div class="track-title adaptation">Adaptation Track</div>
-					<div class="track-content">
-						<p><strong>Question:</strong> Consider the following graph: Which one of the following can be a valid sequence of edges added, in that order, to a minimum spanning tree using Kruskal's algorithm?</p>
-						<p>
-							<img src="./assets/samples/images_for_adaptation_track/validation_Computer_Science_19.png" alt="Kruskal's Algorithm Adaptation Question" style="max-width: 100%; height: auto; display: block; margin: 10px auto;" />
-						</p>
-						<p><strong>Options:</strong></p>
-						<ol type="A">
-							<li>(a-b), (b-f), (d-f), (d-c), (d-e)</li>
-							<li>(a-b), (d-c), (d-f), (b-f), (d-e)</li>
-							<li>(d-f), (d-e), (a-b), (d-c), (b-f)</li>
-							<li>(d-f), (a-b), (b-f), (d-c), (d-e)</li>
-							<li>(a-c), (b-f), (d-f), (d-c), (d-e)</li>
-							<li>(d-f), (d-c), (a-b), (b-f), (d-e)</li>
-							<li>(a-c), (d-f), (b-f), (d-e), (d-c)</li>
-							<li>(d-c), (d-f), (a-b), (b-f), (d-e)</li>
-							<li>(d-f), (b-f), (a-b), (d-c), (d-e)</li>
-							<li>(a-c), (d-c), (d-f), (b-f), (d-e)</li>
-						</ol>
-						<p><strong>Ground truth: </strong>D. (d-f), (a-b), (b-f), (d-c), (d-e)</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <section id="Science">
+    <hr class="mt-5">
+    <div class="container text-center" style="margin-top: 30px">
+       <!-- Section Title -->
+       <h2 class="section-title">Examples - Perception Reasoning</h2>
+       <div id="scienceCarousel" class="carousel slide mb-4" data-ride="carousel" data-interval="5000">
+          <ol class="carousel-indicators">
+             <li data-target="#scienceCarousel" data-slide-to="0" class="active"></li>
+             <li data-target="#scienceCarousel" data-slide-to="1"></li>
+             <li data-target="#scienceCarousel" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+             <!-- Slide 1: Icon (Perception) -->
+             <div class="carousel-item active">
+                <img src="./assets/seven_categories_carousel/Perception%20Reasoning/icon.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Icon Integration">
+             </div>
+             <!-- Slide 2: Logo (Comprehension) -->
+             <div class="carousel-item">
+                <img src="./assets/seven_categories_carousel/Perception%20Reasoning/logo.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Logo Integration">
+             </div>
+             <!-- Slide 3: Shape (Adaptation) -->
+             <div class="carousel-item">
+                <img src="./assets/seven_categories_carousel/Perception%20Reasoning/in.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Shape Integration">
+             </div>
+          </div>
+          <!-- 左右箭头 -->
+          <a class="carousel-control-prev" href="#scienceCarousel" role="button" data-slide="prev">
+             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+             <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#scienceCarousel" role="button" data-slide="next">
+             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+             <span class="sr-only">Next</span>
+          </a>
+       </div>
+       <!-- Question Tracks（已按你提供的完整prompt替换） -->
+       <div class="tracks-row flex" style="margin-top: 20px;">
+          <!-- Perception Track -->
+          <div class="track">
+             <div class="track-title perception">Icon</div>
+             <div class="track-content">
+                <p><strong>Question:</strong> This image contains a icon integrated into a background, where elements of the background contribute to forming the icon. Identify the icon that is represented in the image by choosing exclusively among the following options:Animal, Face_Emoji, Music, Sport, Stationery, Vehicle,Ocean, Origami, Forest, Cloud, Sand_dune, Medieval_Village, City, Underwater_ruins, Museum, Bazaar_market, Time_square. Provide your response by stating only the single, most accurate class name that represents the icon. You have to respond with a single word.</p>
+                <p><strong>Ground truth: </strong>Animal</p>
+             </div>
+          </div>
+          <!-- Comprehension Track -->
+          <div class="track">
+             <div class="track-title comprehension">Logo</div>
+             <div class="track-content">
+                <p><strong>Question:</strong> This image contains a icon integrated into a background, where elements of the background contribute to forming the logo. Identify the logo that is represented in the image by choosing exclusively among the following options:Adidas, Amazon, Apple, Audi, BMW, Mercedes Benz, Facebook, Google, Instagram, Mcdonalds, Nasa, Nike, Olympics, Playstation, Puma, Reebok, Spotify, Starbucks, Tesla, Telegram, Ubuntu,Ocean, Origami, Forest, Cloud, Sand_dune, Medieval_Village, City, Underwater_ruins, Museum, Bazaar_market, Time_square. Provide your response by stating only the single, most accurate class name that represents the logo. You have to respond with a single word.</p>
+                <p><strong>Ground truth: </strong>Audi</p>
+             </div>
+          </div>
+          <!-- Adaptation Track -->
+          <div class="track">
+             <div class="track-title adaptation">In</div>
+             <div class="track-content">
+                <p><strong>Question:</strong> This image contains a icon integrated into a background, where elements of the background contribute to forming the icon. Identify the shape that is represented in the image by choosing exclusively among the following options:Airplane, Bicycle, Bird, Bottle, Car, Cat, Dog, Dolphin, Fork, Guitar, Mug, Panda, Paper_clip, Sailboat, Scooter, Teapot,Ocean, Origami, Forest, Cloud, Sand_dune, Medieval_Village, City, Underwater_ruins, Museum, Bazaar_market, Time_square. Provide your response by stating only the single, most accurate class name that represents the icon. You have to respond with a single word.</p>
+                <p><strong>Ground truth: </strong>Bicycle</p>
+             </div>
+          </div>
+       </div>
+    </div>
+</section>
+    <!-- <hr class="mt-5"> -->
+
+    <section id="Medicine">
+    <hr class="mt-5">
+    <div class="container text-center" style="margin-top: 30px">
+       <!-- Section Title -->
+       <h2 class="section-title">Examples - STEM</h2>
+       <!-- 三个图片轮播（完全模仿 Science/Humanities 样式） -->
+       <div id="medicineCarousel" class="carousel slide mb-4" data-ride="carousel" data-interval="5000">
+          <ol class="carousel-indicators">
+             <li data-target="#medicineCarousel" data-slide-to="0" class="active"></li>
+             <li data-target="#medicineCarousel" data-slide-to="1"></li>
+             <li data-target="#medicineCarousel" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+             <!-- Slide 1: Mechanics 1 (Perception) -->
+             <div class="carousel-item active">
+                <img src="./assets/seven_categories_carousel/STEM/phyx_mechanics1.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Free Fall Pisa">
+             </div>
+             <!-- Slide 2: Mechanics 2 (Comprehension) -->
+             <div class="carousel-item">
+                <img src="./assets/seven_categories_carousel/STEM/phyx_mechanics2.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Skateboard Ramp">
+             </div>
+             <!-- Slide 3: Optics (Adaptation) -->
+             <div class="carousel-item">
+                <img src="./assets/seven_categories_carousel/STEM/phyx_optics.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Critical Angle Optics">
+             </div>
+          </div>
+          <!-- 左右箭头 -->
+          <a class="carousel-control-prev" href="#medicineCarousel" role="button" data-slide="prev">
+             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+             <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#medicineCarousel" role="button" data-slide="next">
+             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+             <span class="sr-only">Next</span>
+          </a>
+       </div>
+       <!-- Question Tracks（按你要求的顺序 + 完整题目文字） -->
+       <div class="tracks-row flex" style="margin-top: 20px;">
+          <!-- Perception Track -->
+          <div class="track">
+             <div class="track-title perception">Mechanics</div>
+             <div class="track-content">
+                <p><strong>Question:</strong> A one-euro coin is dropped from the Leaning Tower of Pisa and falls freely from rest. What are its position after 3.0 s? Ignore air resistance.<br>Please directly answer the question and provide the correct OPTION LETTER ONLY, e.g., A, B, C, D.</p>
+                <p><strong>OPTION:</strong><br>A: -35m B: -44m C: -65m D: -51m</p>
+                <p><strong>Ground truth: </strong>B</p>
+             </div>
+          </div>
+          <!-- Comprehension Track -->
+          <div class="track">
+             <div class="track-title comprehension">Mechanics</div>
+             <div class="track-content">
+                <p><strong>Question:</strong> Your cousin Throckmorton skateboards from rest down a curved, frictionless ramp. If we treat Throcky and his skateboard as a particle, he moves through a quarter-circle as shown in figure. Throcky and his skateboard have a total mass of 25.0 kg. Find his speed at the bottom of the ramp.<br>Please directly answer the question and provide the correct OPTION LETTER ONLY, e.g., A, B, C, D.</p>
+                <p><strong>OPTION:</strong><br>A: 5.42m/s B: 7.67m/s C: 4.98m/s D: 9.02m/s</p>
+                <p><strong>Ground truth: </strong>B</p>
+             </div>
+          </div>
+          <!-- Adaptation Track -->
+          <div class="track">
+             <div class="track-title adaptation">Optics</div>
+             <div class="track-content">
+                <p><strong>Question:</strong> The light beam in figure strikes surface 2 at the critical angle. Determine the angle of incidence θ₁.<br>Please directly answer the question and provide the correct OPTION LETTER ONLY, e.g., A, B, C, D.</p>
+                <p><strong>OPTION:</strong><br>A: 17.5° B: 19.3° C: 27.5° D: 42.3°</p>
+                <p><strong>Ground truth: </strong>C</p>
+             </div>
+          </div>
+       </div>
+    </div>
+</section>
+    <!-- <hr class="mt-5"> -->
+
+    <section id="Engineering">
+    <hr class="mt-5">
+    <div class="container text-center" style="margin-top: 30px">
+       <!-- Section Title -->
+       <h2 class="section-title">Examples - Real-world
+Applications</h2>
+       <!-- 三个图片轮播（完全模仿之前样式） -->
+       <div id="engineeringCarousel" class="carousel slide mb-4" data-ride="carousel" data-interval="5000">
+          <ol class="carousel-indicators">
+             <li data-target="#engineeringCarousel" data-slide-to="0" class="active"></li>
+             <li data-target="#engineeringCarousel" data-slide-to="1"></li>
+             <li data-target="#engineeringCarousel" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+             <!-- Slide 1: Collision Navigation (Perception) -->
+             <div class="carousel-item active">
+                <img src="./assets/seven_categories_carousel/Real-world%20App/vsp_collision.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Collision Navigation">
+             </div>
+             <!-- Slide 2: Google Map Pathfinder (Comprehension) -->
+             <div class="carousel-item">
+                <img src="./assets/seven_categories_carousel/Real-world%20App/vsp_google_map.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Google Map Pathfinder">
+             </div>
+             <!-- Slide 3: Attentional Focusing (Adaptation) -->
+             <div class="carousel-item">
+                <img src="./assets/seven_categories_carousel/Real-world%20App/Attentional Focusing.png" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Attentional Focusing">
+             </div>
+          </div>
+          <!-- 左右箭头 -->
+          <a class="carousel-control-prev" href="#engineeringCarousel" role="button" data-slide="prev">
+             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+             <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#engineeringCarousel" role="button" data-slide="next">
+             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+             <span class="sr-only">Next</span>
+          </a>
+       </div>
+       <!-- Question Tracks -->
+       <div class="tracks-row flex" style="margin-top: 20px;">
+          <!-- Perception Track -->
+          <div class="track">
+             <div class="track-title perception">Vsp Collision</div>
+             <div class="track-content">
+                <p><strong>Question:</strong> As a professional navigation agent, your task is to analyze a map and determine the time needed for the car and the person passing the goal.<br><br>## Game Setup<br>- The game presents a fully observable map. There is a person, a car, and a goal on the map.<br>- The game further specifies the moving direction of the person and car ("up", "down", "left", "right").<br>- Your goal is to determine the time needed for the car and the person passing the goal.<br><br>The following figure shows how the player, the car, and the goals look like. <img src="./assets/seven_categories_carousel/Real-world%20App/vsp_collision_icon_image.png" alt="Icon Image" style="max-width: 100%; height: auto; display: block; margin: 10px auto;"> We provide an example to further illustrate the rules. <img src="./assets/seven_categories_carousel/Real-world%20App/vsp_collision_example_image.png" alt="Example Image" style="max-width: 100%; height: auto; display: block; margin: 10px auto;"><br><br>The car is moving left with speed 1.0 grid per second, and the person is moving up with speed 0.5 grid per second. In this provided example:<br>- The car is 2 grid away from the goal. Given it's time as 1.0 grid per second, the time needed is 2 / 1.0 = 2 seconds.<br>- The person is 1 grid away from the goal. Given it's time as 0.5 grid per second, the time needed is 1 / 0.5 = 2 seconds.<br><br>## Procedure and Output<br>Now you will answer for the following given map. To solve it, analyze the car and the person separately. Then, answer for them separately. For example:<br>Car: 2.0<br>Person: 2.0<br>means car and the person will need 2.0 seconds to pass the goal respectively. Do not output any extra content after the above aggregated output.<br><br>Please analyze and determine the time needed for the car and the person passing the goal:<br><br>The car is moving left with speed 1.0, and the person is moving down with speed 0.25. Answer:</p>
+                <p>
+                   <img src="./assets/seven_categories_carousel/Real-world%20App/vsp_collision.png" alt="Perception Map" style="max-width: 100%; height: auto; display: block; margin: 10px auto;">
+                </p>
+                <p><strong>Ground truth: </strong>'gt_car': 3.0, 'gt_person': 4.0</p>
+             </div>
+          </div>
+          <!-- Comprehension Track -->
+          <div class="track">
+             <div class="track-title comprehension">Vsp Google Map</div>
+             <div class="track-content">
+                <p><strong>Question:</strong> As a professional pathfinder, your task is to analyze a map and find a route from the starting location to the goal. Since coding is not within your skill set, your approach relies on logical reasoning of the map.<br><br>## Game Setup<br>- The game presents a fully observable map.<br>- The starting location is marked with blue "S", and the goal is marked with red "G".<br>- Your goal is to find a path from the starting location to the goal.<br><br>## Moving Rules<br>- The action plan involves moves in four directions: 'W' (West), 'E' (east), 'N' (north), or 'S' (south).<br>- Each move is along with distances. Distances are measured by how many crossroads passed.<br><br>We provide an example to further illustrate the rules.<br><img src="./assets/seven_categories_carousel/Real-world%20App/vsp_google_map_example_image.png" alt="Example Map" style="max-width: 100%; height: auto; display: block; margin: 10px auto;"><br>In this provided example:<br>- You are now at the southwest of the goal.<br>- If you move north by 1 crossroad, you will be at the west of the goal.<br>- If you move east by 4 crossroads, you will be at the goal.<br>- IMPORTANT: Please ignore the name of the street and avenue. The numbers in the name cannot be used to compute how many crossroads need to be passed.<br><br>## Procedure and Output<br>Now you will solve the given maze. To analyze the relative spatial relation between the starting point and the goal (for example, southwest). Then, output a path using the format &lt;Direction&gt;: &lt;Number of crossroads passed&gt;. For example:<br>&lt;Output&gt;<br>## North: 1<br>## East: 4<br>means move north by 1 crossroad, and move east by 4 crossroads.<br>&lt;Output&gt;<br>## South: 1<br>means move south by 1 crossroad. Do not output any extra content after the above aggregated output.<br><br>Please output path for the following map:</p>
+                <p>
+                   <img src="./assets/seven_categories_carousel/Real-world%20App/vsp_google_map.png" alt="Comprehension Map" style="max-width: 100%; height: auto; display: block; margin: 10px auto;">
+                </p>
+                <p><strong>Ground truth: </strong>-1 1</p>
+             </div>
+          </div>
+          <!-- Adaptation Track -->
+          <div class="track">
+             <div class="track-title adaptation">Attentional Focusing</div>
+             <div class="track-content">
+                <p><strong>Question:</strong> How many people are wearing a white hat?</p>
+                <p>
+                   <img src="./assets/seven_categories_carousel/Real-world%20App/Attentional Focusing.png" alt="Attentional Focusing" style="max-width: 100%; height: auto; display: block; margin: 10px auto;">
+                </p>
+                <p><strong>Options:</strong><br>A: 5 B: 4 C: 3 D: 6</p>
+                <p><strong>Ground truth: </strong>B</p>
+             </div>
+          </div>
+       </div>
+    </div>
+</section>
+
+    <section id="AttributeMotion">
+    <hr class="mt-5">
+    <div class="container text-center" style="margin-top: 30px">
+       <!-- Section Title -->
+       <h2 class="section-title">Examples - Spatial Intelligence</h2>
+       <!-- Carousel with 3 slides (each slide shows a logical pair of your 6 images) -->
+       <div id="attributeCarousel" class="carousel slide mb-4" data-ride="carousel" data-interval="5000">
+          <ol class="carousel-indicators">
+             <li data-target="#attributeCarousel" data-slide-to="0" class="active"></li>
+             <li data-target="#attributeCarousel" data-slide-to="1"></li>
+             <li data-target="#attributeCarousel" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+             <!-- Slide 1: Houses (for Question 1) -->
+             <div class="carousel-item active">
+                <div class="row justify-content-center">
+                  <div class="col-md-6">
+                    <img src="./assets/seven_categories_carousel/Spatial%20Intelligence/attribute_appr1.jpg" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Model Building 1">
+                  </div>
+                  <div class="col-md-6">
+                    <img src="./assets/seven_categories_carousel/Spatial%20Intelligence/attribute_appr2.jpg" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Model Building 2">
+                  </div>
+                </div>
+             </div>
+             <!-- Slide 2: Furniture (for Question 2) -->
+             <div class="carousel-item">
+                <div class="row justify-content-center">
+                  <div class="col-md-6">
+                    <img src="./assets/seven_categories_carousel/Spatial%20Intelligence/attribute_meas1.jpg" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Cabinet (Figure 1)">
+                  </div>
+                  <div class="col-md-6">
+                    <img src="./assets/seven_categories_carousel/Spatial%20Intelligence/attribute_meas2.jpg" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Table (Figure 2)">
+                  </div>
+                </div>
+             </div>
+             <!-- Slide 3: Motion (for Question 3) -->
+             <div class="carousel-item">
+                <div class="row justify-content-center">
+                  <div class="col-md-6">
+                    <img src="./assets/seven_categories_carousel/Spatial%20Intelligence/motion_cam1.jpg" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Motion Frame 1">
+                  </div>
+                  <div class="col-md-6">
+                    <img src="./assets/seven_categories_carousel/Spatial%20Intelligence/motion_cam2.jpg" class="d-block w-100" style="max-height: 420px; object-fit: contain;" alt="Motion Frame 2">
+                  </div>
+                </div>
+             </div>
+          </div>
+          <!-- 左右箭头 -->
+          <a class="carousel-control-prev" href="#attributeCarousel" role="button" data-slide="prev">
+             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+             <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#attributeCarousel" role="button" data-slide="next">
+             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+             <span class="sr-only">Next</span>
+          </a>
+       </div>
+       <!-- Question Tracks（完全替换为你提供的3个问题） -->
+       <div class="tracks-row flex" style="margin-top: 20px;">
+          <!-- Perception Track -->
+          <div class="track">
+             <div class="track-title perception">Attribute(Appr)</div>
+             <div class="track-content">
+                <p><strong>Question:</strong> How many different houses are captured in total in these two pictures?<br>Please directly answer the question and provide the correct OPTION LETTER ONLY, e.g., A, B, C, D.</p>
+                <p><strong>OPTION:</strong><br>A: 4 B: 2 C: 3 D: 5</p>
+                <p><strong>Ground truth: </strong>D</p>
+             </div>
+          </div>
+          <!-- Comprehension Track -->
+          <div class="track">
+             <div class="track-title comprehension">Attribute(Meas)</div>
+             <div class="track-content">
+                <p><strong>Question:</strong> Which has a longer side perpendicular to the adjacent wall: the cabinet in Figure 1 or the table in Figure 2?<br>Please directly answer the question and provide the correct OPTION LETTER ONLY, e.g., A, B, C, D.</p>
+                <p><strong>OPTION:</strong><br>A: The table in Figure 2 B: The same length C: The cabinet in Figure 1 D: Sometimes the cabinet in Figure 1, sometimes the table in Figure 2</p>
+                <p><strong>Ground truth: </strong>A</p>
+             </div>
+          </div>
+          <!-- Adaptation Track -->
+          <div class="track">
+             <div class="track-title adaptation">Motion(Cam)</div>
+             <div class="track-content">
+                <p><strong>Question:</strong> The images are taken continuously from a first-person perspective. In which direction is your viewpoint rotating?<br>Please directly answer the question and provide the correct OPTION LETTER ONLY, e.g., A, B, C, D.</p>
+                <p><strong>OPTION:</strong><br>A: Down B: Left C: Right D: Up</p>
+                <p><strong>Ground truth: </strong>B</p>
+             </div>
+          </div>
+       </div>
+    </div>
+</section>
+
+
+<!-- 位置要求：放在所有 <section> 之后、</body> 标签之前 -->
+
+<!-- 1. jQuery（Bootstrap 4 必须） -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- 2. Bootstrap 4 JS（包含 Popper.js） -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- 3. 手动初始化你页面中的所有7个轮播图（解决 data-ride 不生效的问题） -->
+<script>
+$(function () {
+    // 列出你所有轮播图的 ID（已包含你当前7个section）
+    const carouselIds = [
+        '#artCarousel',
+        '#businessCarousel',
+        '#humanitiesCarousel',
+        '#scienceCarousel',
+        '#medicineCarousel',
+        '#engineeringCarousel',
+        '#attributeCarousel'
+    ];
+
+    carouselIds.forEach(function(id) {
+        const $carousel = $(id);
+        if ($carousel.length) {
+            $carousel.carousel({
+                interval: 5000,     // 每5秒自动切换（和你原来 data-interval 一致）
+                pause: "hover",     // 鼠标悬停暂停
+                wrap: true,         // 循环播放
+                keyboard: true      // 支持键盘左右箭头
+            });
+        }
+    });
+
+    console.log("✅ Video-MMMU 7个轮播图已全部初始化成功！");
+});
+</script>
+
+
+
 	<hr class="mt-5">
 
 	<section id="citation" style="text-align: center; margin-top: 10px;">
@@ -1354,6 +1813,8 @@
 		</p>
 	</div>
 	<br>
+
+
 	
 
 </body>
